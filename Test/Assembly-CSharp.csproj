@@ -53,6 +53,7 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\ButtonMainMenu.cs" />
      <Compile Include="Assets\Scripts\Interraction.cs" />
+     <Compile Include="Assets\Scripts\PlaceButtons.cs" />
      <Compile Include="Assets\Scripts\SceneTransition.cs" />
      <Compile Include="Assets\Transition\FadeTransition.cs" />
      <Compile Include="Assets\Transition\TransitionKit.cs" />
