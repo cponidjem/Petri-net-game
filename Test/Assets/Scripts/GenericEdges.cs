@@ -66,7 +66,7 @@ public class GenericEdges : MonoBehaviour {
 			//touch moving
 			case TouchPhase.Moved:
 				//display the moving line
-				if(edgeList.Count != 0 && edgeList[edgeList.Count-1].start!=null) {
+				if(edgeList.Count != 0 && edgeList[edgeList.Count-1].start!=null && edgeList[edgeList.Count-1].end==null) {
 					configureArrow (arrow, getAppropriatePosition (edgeList [edgeList.Count - 1].start, touchPos.x), touchPos);
 				}
 				break;
@@ -90,12 +90,14 @@ public class GenericEdges : MonoBehaviour {
 						}
 						i++;
 					}
-					if (!found) {
-						edgeList.RemoveAt (edgeList.Count - 1);
-					} else {
+					if (found) {
 						edge = edgeList[edgeList.Count-1];
 						positions = getAppropriatePositions(edge.start,edge.end);
 						configureArrow (GameObject.Instantiate(arrow),positions.position1,positions.position2);
+					} else {
+						if (edgeList [edgeList.Count - 1].end == null) {
+							edgeList.RemoveAt (edgeList.Count - 1);
+						}
 					}
 					configureArrow (arrow,init,init);
 				}
@@ -149,7 +151,7 @@ public class GenericEdges : MonoBehaviour {
 			rotationZ = - rotationZ;
 		}
 		instance.transform.position = position;
-		instance.transform.localScale = new Vector3(scaleX/4, instance.transform.localScale.y, 0);
+		instance.transform.localScale = new Vector3(scaleX/2, instance.transform.localScale.y, 0);
 		instance.transform.rotation = Quaternion.AngleAxis (rotationZ, Vector3.forward);
 	}
 }
