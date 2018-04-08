@@ -85,8 +85,8 @@ public class Transition
 
 public class GameModel : GameElement
 {
-    List<Place> places;
-    List<Transition> transitions;
+    private List<Place> places;
+    private List<Transition> transitions;
 
     public void initialisation(List<Place> places, List<Transition> transitions)
     {
@@ -118,5 +118,10 @@ public class GameModel : GameElement
         }
         return false;
     }
+
+    public List<Place> getPlaces()
+    {
+        return this.places;
+}
 }
 

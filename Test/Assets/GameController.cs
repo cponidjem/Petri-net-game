@@ -18,14 +18,14 @@ public class GameController : GameElement {
             // Effectuate the transition on the model
             game.model.performFire(transitionId);
             Debug.Log("Transition fired.");
+
+            // Fire the transition in graphics
+            game.view.FireTransition(transitionId);
+            
         } else
         {
             Debug.Log("Transition cannot be fired.");
         }
-
-
-        // Update graphics
-
     }
 
 }

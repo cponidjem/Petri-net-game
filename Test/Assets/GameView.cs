@@ -4,6 +4,18 @@ using UnityEngine;
 
 public class GameView : GameElement {
 
+    // Effectuate the transition.
+    public void FireTransition(int id)
+    {
+        foreach (TransitionElement t in this.GetComponentsInChildren<TransitionElement>())
+        {
+            if(t.id == id)
+            {
+                t.FireTransition();
+            }
+        }
+    }
+
     // Return all places of the scene.
     public List<Place> getPlaces()
     {
