@@ -86,6 +86,8 @@ MonoBehaviour:
   - {fileID: 0}
   postconditionCoefficients: 01000000
   arcPrefab: {fileID: 1598733875001038, guid: 3fba0a1bbbbf5a5479ece6e2042dcb77, type: 2}
+  transitionExplosion: {fileID: 1197788125174384, guid: 11a6ebf7ac48b194d9897e2c4aebce36,
+    type: 2}
 --- !u!212 &212396873509041790
 SpriteRenderer:
   m_ObjectHideFlags: 1

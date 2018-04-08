@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 224431089759647732}
   - component: {fileID: 222001023666043518}
   - component: {fileID: 114256451727271002}
-  - component: {fileID: 114510001614725622}
   m_Layer: 5
   m_Name: NumberOfTokensText
   m_TagString: Untagged
@@ -62,17 +61,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 0
---- !u!114 &114510001614725622
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1536644771483470}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67954fcc321762042b6b977df15baf29, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!222 &222001023666043518
 CanvasRenderer:
   m_ObjectHideFlags: 1
