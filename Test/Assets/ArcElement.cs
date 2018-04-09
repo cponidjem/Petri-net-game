@@ -12,6 +12,7 @@ public class ArcElement : GameElement
     public enum ConditionType { PRECONDITION, POSTCONDITION };
     public ConditionType type;
     public int coeff;
+    public GameObject coefficientText;
 
     void Start()
     {
@@ -40,5 +41,14 @@ public class ArcElement : GameElement
         }
         Vector3 rotationChange = new Vector3(0, 0, z_angle_deg);
         transform.Rotate(rotationChange);
+        // Initialise coefficient text
+        coefficientText = Instantiate(coefficientText, transform.position, transform.rotation, game.GetComponentInChildren<Canvas>().transform);
+        coefficientText.GetComponent<UnityEngine.UI.Text>().text = coeff.ToString();
+    }
+    // Update the text to correspond to marking.
+    void Update()
+    {
+        coefficientText.GetComponent<UnityEngine.UI.Text>().text = coeff.ToString();
+        coefficientText.transform.position = transform.position;
     }
 }

@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 222001023666043518}
   - component: {fileID: 114256451727271002}
   m_Layer: 5
-  m_Name: NumberOfTokensText
+  m_Name: TextLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

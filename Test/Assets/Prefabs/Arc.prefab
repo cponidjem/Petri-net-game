@@ -56,6 +56,8 @@ MonoBehaviour:
   transition: {fileID: 0}
   type: 1
   coeff: 1
+  coefficientText: {fileID: 1536644771483470, guid: 57a14bfdceba5994d97c8de694f926fc,
+    type: 2}
 --- !u!212 &212889622241607750
 SpriteRenderer:
   m_ObjectHideFlags: 1
