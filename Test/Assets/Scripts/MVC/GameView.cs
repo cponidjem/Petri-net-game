@@ -3,18 +3,35 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GameView : GameElement {
+	PlaceElement[] places;
+	TransitionElement[] transitions;
+
+	void Start(){
+		places = new PlaceElement[this.GetComponentsInChildren<PlaceElement>().Length];
+		transitions = new TransitionElement[this.GetComponentsInChildren<TransitionElement>().Length];
+
+		foreach (PlaceElement p in this.GetComponentsInChildren<PlaceElement>())
+		{
+			places[p.id] = p;
+		}
+
+		foreach (TransitionElement t in this.GetComponentsInChildren<TransitionElement>())
+		{
+			transitions[t.id] = t;
+		}
+	}
 
     // Effectuate the transition.
-    public void FireTransition(int id)
+	public void updateGraphics(List<Place> newPlaces)
     {
-        foreach (TransitionElement t in this.GetComponentsInChildren<TransitionElement>())
-        {
-            if(t.id == id)
-            {
-                t.FireTransition();
-            }
-        }
+		foreach (Place newPlace in newPlaces) {
+			places [newPlace.id].changeMarking (newPlace.marking);
+		}
     }
+
+	public void transitionAnimation(int transitionId){
+		transitions [transitionId].FireTransition ();
+	}
 
     // Return all places of the scene.
     public List<Place> getPlaces()
@@ -22,7 +39,7 @@ public class GameView : GameElement {
         List<Place> places = new List<Place>();
         foreach (PlaceElement p in this.GetComponentsInChildren<PlaceElement>())
         {
-            places.Add(new Place(p.id, p.marking));
+			places.Add(new Place(p.id, p.initialMarking));
         }
         return places;
     }

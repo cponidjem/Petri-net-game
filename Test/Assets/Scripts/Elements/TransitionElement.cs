@@ -43,23 +43,10 @@ public class TransitionElement : GameElement {
         game.controller.OnTransitionClicked(id);
     }
 
-    // Display animation & change markings according to coefficients.
+    // Display animation
     public void FireTransition()
     {
         Instantiate(transitionExplosion, transform);
-
-        int i = 0;
-        foreach (PlaceElement p in preconditions)
-        {
-            p.marking -= preconditionCoefficients[i];
-            ++i;
-        }
-        i = 0;
-        foreach (PlaceElement p in postconditions)
-        {
-            p.marking += postconditionCoefficients[i];
-            ++i;
-        }
     }
 
 }

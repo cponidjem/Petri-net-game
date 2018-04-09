@@ -12,20 +12,26 @@ public class GameController : GameElement {
 
     public void OnTransitionClicked(int transitionId)
     {
+		List<Place> places = new List<Place> ();
         // Check if preconditions are filled.
         if (game.model.canPerformFire(transitionId))
         {
             // Effectuate the transition on the model
-            game.model.performFire(transitionId);
+            places = game.model.performFire(transitionId);
             Debug.Log("Transition fired.");
 
-            // Fire the transition in graphics
-            game.view.FireTransition(transitionId);
+			//Animation
+			game.view.transitionAnimation (transitionId);
+
+            // Update graphics
+			game.view.updateGraphics(places);
+
             
         } else
         {
             Debug.Log("Transition cannot be fired.");
         }
+
     }
 
 }
