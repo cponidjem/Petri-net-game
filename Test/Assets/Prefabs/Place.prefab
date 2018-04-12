@@ -53,9 +53,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
-  marking: 0
+  initialMarking: 0
   numberOfTokensText: {fileID: 1536644771483470, guid: 57a14bfdceba5994d97c8de694f926fc,
     type: 2}
+  token: {fileID: 1215654875122686, guid: db72536514438d746a54fcb99463498e, type: 2}
 --- !u!212 &212760572609537270
 SpriteRenderer:
   m_ObjectHideFlags: 1
