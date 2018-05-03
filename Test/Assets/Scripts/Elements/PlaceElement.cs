@@ -4,22 +4,22 @@ using UnityEngine;
 
 public class PlaceElement : GameElement {
 
-    public int id;
-    public int initialMarking;
+	public int id;
+	public int initialMarking;
 
-    public GameObject numberOfTokensText;
+	public GameObject numberOfTokensText;
 	public GameObject token;
 
-    // Add text representing the marking.
-    void Start()
+	// Add text representing the marking.
+	void Start()
 	{
 		for (int i = 0; i < initialMarking; i++) {
 			GameObject newToken = GameObject.Instantiate (token, transform);
 		}
-        //numberOfTokensText = Instantiate(numberOfTokensText, transform.position,transform.rotation, game.GetComponentInChildren<Canvas>().transform);
-        //numberOfTokensText.GetComponent<UnityEngine.UI.Text>().text = marking.ToString();
-    }
-		
+		//numberOfTokensText = Instantiate(numberOfTokensText, transform.position,transform.rotation, game.GetComponentInChildren<Canvas>().transform);
+		//numberOfTokensText.GetComponent<UnityEngine.UI.Text>().text = marking.ToString();
+	}
+
 
 	// Update the text to correspond to marking.
 	public void changeMarking(int newMarking){
@@ -35,4 +35,13 @@ public class PlaceElement : GameElement {
 
 	}
 
+
+	void OnMouseUp(){
+		RaycastHit2D hit = Physics2D.Raycast (Camera.main.ScreenToWorldPoint (Input.mousePosition), Vector2.zero);
+		if (hit.collider!=null) {
+			if (hit.collider.gameObject.CompareTag("Transition")) {
+				Debug.Log ("call addPrecondition with idTransition: "+(hit.collider.gameObject.GetComponent<TransitionElement>()).id+" and idPlace: "+this.id);
+			}
+		}
+	}
 }
