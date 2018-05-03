@@ -81,6 +81,7 @@ public class TransitionElement : GameElement {
             postconditions.Add(places[arc.idPlace]);
             postconditionCoefficients.Add(arc.coeff);
         }
+        updateArcObjects();
     }
 
     // Update arcs
@@ -90,7 +91,7 @@ public class TransitionElement : GameElement {
         ArcElement[] arcsToDestroy = this.GetComponentsInChildren<ArcElement>();
         for(int idx = 0; idx < arcsToDestroy.GetLength(0); idx++)
         {
-            Destroy(arcsToDestroy[idx]);
+            Destroy(arcsToDestroy[idx].gameObject);
         }
 
 

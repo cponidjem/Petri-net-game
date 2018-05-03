@@ -149,20 +149,20 @@ public class GameModel : GameElement
 		foreach (Transition transition in transitions) {
 			if (transition.id == idTransition) {
 				if(direction) {
-                    foreach( Arc arc in transition.preconditions)// If arc exists already, remove
+                    for (int i = 0; i < transition.preconditions.Count; i++) // If arc exists already, remove
                     {
-                        if (arc.idPlace == idPlace)
+                        if (transition.preconditions[i].idPlace == idPlace)
                         {
-                            
+                            transition.preconditions.RemoveAt(i);
                         }
                     }
                     transition.preconditions.Add (new Arc (idPlace, coeff));
 				} else {
-                    foreach (Arc arc in transition.postconditions) // If arc exists already, remove
+                    for (int i = 0; i < transition.postconditions.Count; i++) // If arc exists already, remove
                     {
-                        if (arc.idPlace == idPlace)
+                        if (transition.postconditions[i].idPlace == idPlace)
                         {
-                            //transition.postconditions.Remove(arc);
+                            transition.postconditions.RemoveAt(i);
                         }
                     }
                     transition.postconditions.Add (new Arc (idPlace, coeff));
