@@ -40,8 +40,9 @@ public class PlaceElement : GameElement {
 		RaycastHit2D hit = Physics2D.Raycast (Camera.main.ScreenToWorldPoint (Input.mousePosition), Vector2.zero);
 		if (hit.collider!=null) {
 			if (hit.collider.gameObject.CompareTag("Transition")) {
-				Debug.Log ("call addPrecondition with idTransition: "+(hit.collider.gameObject.GetComponent<TransitionElement>()).id+" and idPlace: "+this.id);
-			}
+				//Debug.Log ("call addPrecondition with idTransition: "+(hit.collider.gameObject.GetComponent<TransitionElement>()).id+" and idPlace: "+this.id);
+                game.controller.OnArcWasDrawn((hit.collider.gameObject.GetComponent<TransitionElement>()).id, this.id, true);
+            }
 		}
 	}
 }

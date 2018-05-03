@@ -24,7 +24,7 @@ public class GameController : GameElement {
 			game.view.transitionAnimation (transitionId);
 
             // Update graphics
-			game.view.updateGraphics(places);
+			game.view.updatePlaces(places);
 
             
         } else
@@ -32,6 +32,21 @@ public class GameController : GameElement {
             Debug.Log("Transition cannot be fired.");
         }
 
+    }
+
+    public void OnArcWasDrawn(int transitionId, int placeId, bool direction)
+    {
+        List<Transition> transitions;
+        if (game.model.canPerformAddArc(transitionId,placeId))
+        {
+            transitions = game.model.performAddArc(transitionId, placeId, direction);
+            game.view.updateTransitions(transitions);
+
+        }
+        else
+        {
+            Debug.Log("Transition or place does not exist.");
+        }
     }
 
 }

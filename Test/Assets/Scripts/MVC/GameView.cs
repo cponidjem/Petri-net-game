@@ -22,7 +22,7 @@ public class GameView : GameElement {
 	}
 
     // Effectuate the transition.
-	public void updateGraphics(List<Place> newPlaces)
+	public void updatePlaces(List<Place> newPlaces)
     {
 		foreach (Place newPlace in newPlaces) {
 			places [newPlace.id].changeMarking (newPlace.marking);
@@ -32,6 +32,15 @@ public class GameView : GameElement {
 	public void transitionAnimation(int transitionId){
 		transitions [transitionId].FireTransition ();
 	}
+
+    // Add the new arc.
+    public void updateTransitions(List<Transition> newTransitions)
+    {
+        foreach (Transition newTransition in newTransitions)
+        {
+            transitions[newTransition.id].changeConditions(newTransition.preconditions, newTransition.postconditions, places);
+        }
+    }
 
     // Return all places of the scene.
     public List<Place> getPlaces()

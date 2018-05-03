@@ -144,31 +144,32 @@ public class GameModel : GameElement
 		return transitionExists && placeExists;
 	}
 
-	public void performAddArc(int idTransition, int idPlace, bool precondition){
+	public List<Transition> performAddArc(int idTransition, int idPlace, bool direction){
         int coeff = 1;
 		foreach (Transition transition in transitions) {
 			if (transition.id == idTransition) {
-				if(precondition) {
-                    foreach (Arc arc in transition.preconditions) // If arc exists already, remove
+				if(direction) {
+                    foreach( Arc arc in transition.preconditions)// If arc exists already, remove
                     {
                         if (arc.idPlace == idPlace)
                         {
-                            transition.preconditions.Remove(arc);
+                            
                         }
                     }
                     transition.preconditions.Add (new Arc (idPlace, coeff));
 				} else {
-                    foreach (Arc arc in transition.preconditions) // If arc exists already, remove
+                    foreach (Arc arc in transition.postconditions) // If arc exists already, remove
                     {
                         if (arc.idPlace == idPlace)
                         {
-                            transition.preconditions.Remove(arc);
+                            //transition.postconditions.Remove(arc);
                         }
                     }
                     transition.postconditions.Add (new Arc (idPlace, coeff));
 				}
 			}
 		}
+        return transitions;
 	}
 
     public List<Place> getPlaces()

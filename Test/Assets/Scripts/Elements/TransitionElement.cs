@@ -5,10 +5,10 @@ using UnityEngine;
 public class TransitionElement : GameElement {
 
 	public int id;
-	public PlaceElement[] preconditions;
-	public int[] preconditionCoefficients;
-	public PlaceElement[] postconditions;
-	public int[] postconditionCoefficients;
+	public List<PlaceElement> preconditions;
+	public List<int> preconditionCoefficients;
+    public List<PlaceElement> postconditions;
+    public List<int> postconditionCoefficients;
 	public GameObject arcPrefab;
 	public GameObject transitionExplosion;
 
@@ -45,7 +45,9 @@ public class TransitionElement : GameElement {
 				game.controller.OnTransitionClicked (id);
 			} else {
 				if (hit.collider.gameObject.CompareTag("Place")) {
-					Debug.Log ("call addPostcondition with idTransition: "+this.id+" and idPlace: "+(hit.collider.gameObject.GetComponent<PlaceElement>()).id);
+					//Debug.Log ("call addPostcondition with idTransition: "+this.id+" and idPlace: "+(hit.collider.gameObject.GetComponent<PlaceElement>()).id);
+                    game.controller.OnArcWasDrawn(this.id, (hit.collider.gameObject.GetComponent<PlaceElement>()).id, false);
+
 				}
 			}
 
@@ -57,5 +59,62 @@ public class TransitionElement : GameElement {
 	{
 		Instantiate(transitionExplosion, transform);
 	}
+
+    // Update conditions.
+
+
+    public void changeConditions(List<Arc> newPreconditions, List<Arc> newPostconditions, PlaceElement[] places)
+    {
+        // Removing old conditions & coefficients.
+        preconditions.Clear();
+        postconditions.Clear();
+        postconditionCoefficients.Clear();
+        preconditionCoefficients.Clear();
+
+        foreach (Arc arc in newPreconditions)
+        {
+            preconditions.Add(places[arc.idPlace]);
+            preconditionCoefficients.Add(arc.coeff);
+        }
+        foreach (Arc arc in newPostconditions)
+        {
+            postconditions.Add(places[arc.idPlace]);
+            postconditionCoefficients.Add(arc.coeff);
+        }
+    }
+
+    // Update arcs
+    private void updateArcObjects()
+    {
+        // Destroy all Arcs connected to the transition element.
+        ArcElement[] arcsToDestroy = this.GetComponentsInChildren<ArcElement>();
+        for(int idx = 0; idx < arcsToDestroy.GetLength(0); idx++)
+        {
+            Destroy(arcsToDestroy[idx]);
+        }
+
+
+        // Create new Arcs.
+        ArcElement arc = arcPrefab.GetComponent<ArcElement>();
+        arc.transition = this;
+        int i = 0;
+        foreach (PlaceElement p in preconditions)
+        {
+            arc.place = p;
+            arc.type = ArcElement.ConditionType.PRECONDITION;
+            arc.coeff = preconditionCoefficients[i];
+            ++i;
+            Instantiate(arc, this.transform);
+        }
+        i = 0;
+        foreach (PlaceElement p in postconditions)
+        {
+            arc.place = p;
+            arc.type = ArcElement.ConditionType.POSTCONDITION;
+            arc.coeff = postconditionCoefficients[i];
+            ++i;
+            Instantiate(arc, this.transform);
+        }
+    }
 
 }
