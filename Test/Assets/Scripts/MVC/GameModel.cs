@@ -128,7 +128,7 @@ public class GameModel : GameElement
         return false;
     }
 
-	public bool canPerformAddArc(int idTransition, int idPlace, int coeff){
+	public bool canPerformAddArc(int idTransition, int idPlace){
 		bool transitionExists = false;
 		bool placeExists = false;
 		foreach (Transition transition in transitions) {
@@ -144,13 +144,28 @@ public class GameModel : GameElement
 		return transitionExists && placeExists;
 	}
 
-	public void performAddArc(int idTransition, int idPlace, int coeff, bool precondition){
+	public void performAddArc(int idTransition, int idPlace, bool precondition){
+        int coeff = 1;
 		foreach (Transition transition in transitions) {
 			if (transition.id == idTransition) {
 				if(precondition) {
-					transition.preconditions.Add (new Arc (idPlace, coeff));
+                    foreach (Arc arc in transition.preconditions) // If arc exists already, remove
+                    {
+                        if (arc.idPlace == idPlace)
+                        {
+                            transition.preconditions.Remove(arc);
+                        }
+                    }
+                    transition.preconditions.Add (new Arc (idPlace, coeff));
 				} else {
-					transition.postconditions.Add (new Arc (idPlace, coeff));
+                    foreach (Arc arc in transition.preconditions) // If arc exists already, remove
+                    {
+                        if (arc.idPlace == idPlace)
+                        {
+                            transition.preconditions.Remove(arc);
+                        }
+                    }
+                    transition.postconditions.Add (new Arc (idPlace, coeff));
 				}
 			}
 		}
