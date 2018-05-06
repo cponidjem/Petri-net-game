@@ -88,7 +88,7 @@ public class GameModel : GameElement
     private List<Place> places;
     private List<Transition> transitions;
 
-	private List<Place> targetPlaces;
+    private List<Place> targetPlaces;
 
 	/*public void initialisation(List<Place> places, List<Transition> transitions, List<Place> targetPlaces)
     {
