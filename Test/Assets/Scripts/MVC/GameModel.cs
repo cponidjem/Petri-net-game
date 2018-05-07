@@ -178,9 +178,14 @@ public class GameModel : GameElement
 	}
 
 	public bool targetPetriNetReached(){
-		for (int i = 0; i < places.Count; i++) {
-			if(!places[i].id.Equals(targetPlaces[i].id) || !places[i].marking.Equals(targetPlaces[i].marking)){
-				return false;
+		foreach(Place targetPlace in  targetPlaces){
+			foreach(Place place in places){
+				if(targetPlace.id == place.id){
+					if (targetPlace.marking != targetPlace.marking) {
+						return false;
+					}
+					break;
+				}
 			}
 		}
 		return true;
