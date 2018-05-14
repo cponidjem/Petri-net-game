@@ -90,18 +90,18 @@ public class GameModel : GameElement
 
     private List<Place> targetPlaces;
 
-	/*public void initialisation(List<Place> places, List<Transition> transitions, List<Place> targetPlaces)
+	public void initialisation(List<Place> places, List<Transition> transitions, List<Place> targetPlaces)
     {
         this.places = places;
         this.transitions = transitions;
 		this.targetPlaces = targetPlaces;
-    }*/
+    }
 
-	public void initialisation(List<Place> places, List<Transition> transitions)
+	/*public void initialisation(List<Place> places, List<Transition> transitions)
 	{
 		this.places = places;
 		this.transitions = transitions;
-	}
+	}*/
 
     public List<Place> performFire(int id)
     {
@@ -181,7 +181,7 @@ public class GameModel : GameElement
 		foreach(Place targetPlace in  targetPlaces){
 			foreach(Place place in places){
 				if(targetPlace.id == place.id){
-					if (targetPlace.marking != targetPlace.marking) {
+					if (targetPlace.marking != place.marking) {
 						return false;
 					}
 					break;

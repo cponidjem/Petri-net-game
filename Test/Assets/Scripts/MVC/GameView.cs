@@ -77,5 +77,8 @@ public class GameView : GameElement {
         return transitions;
     }
 
+	public void winningScreen(){
+	}
+
 
 }

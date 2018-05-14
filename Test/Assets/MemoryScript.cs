@@ -5,7 +5,11 @@ using UnityEngine;
 // Thing where we can store information between scenes. Shoul be replaced when better solution emerges.
 public class MemoryScript : MonoBehaviour {
 
-    public List<Place> targetPlaces;
+    private List<Place> targetPlaces;
+
+	public List<Place> getEndPlaces(){
+		return targetPlaces;
+	}
 
     // Use this for initialization
     void Start () {

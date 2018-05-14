@@ -28,7 +28,7 @@ public class GameController : GameElement {
 
 
         // Initialise game model using the scene
-        game.model.initialisation(game.view.getPlaces(), game.view.getTransitions());
+		game.model.initialisation(game.view.getPlaces(), game.view.getTransitions(),memory.getEndPlaces());
 
 
     }
@@ -48,6 +48,12 @@ public class GameController : GameElement {
 
             // Update graphics
 			game.view.updatePlaces(places);
+
+			if (game.model.targetPetriNetReached ()) {
+				game.view.winningScreen ();
+				Debug.Log ("end reached");
+				//game.controller.OnResetClicked ();
+			}
 
             
         } else
@@ -71,5 +77,11 @@ public class GameController : GameElement {
             Debug.Log("Transition or place does not exist.");
         }
     }
+
+	public void OnResetClicked(){
+		string sceneName = SceneManager.GetActiveScene().name;
+		SceneManager.LoadSceneAsync(sceneName);
+		Debug.Log ("reset");
+	}
 
 }
