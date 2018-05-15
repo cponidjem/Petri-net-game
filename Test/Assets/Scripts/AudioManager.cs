@@ -22,6 +22,11 @@ public class AudioManager : MonoBehaviour {
         }
         DontDestroyOnLoad(gameObject);
 
+        if (PauseMenu.GameIsPaused)
+        {
+            myMusic.volume = 0.2f;
+        }
+
        /* foreach(Sound s in sounds){
             s.source = gameObject.AddComponent<AudioSource>();
             s.source.clip = s.clip;
