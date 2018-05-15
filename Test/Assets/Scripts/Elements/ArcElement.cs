@@ -19,8 +19,16 @@ public class ArcElement : GameElement
         // Place the arc between place and transition
         Vector3 sourcePosition = place.getPosition();
         Vector3 destinationPosition = transition.getPosition();
+		float correctionCoef = 0.45f;
+
+		float posX = 0.0f;
+		if (type == ConditionType.PRECONDITION) {
+			posX = sourcePosition.x + correctionCoef + (destinationPosition.x - sourcePosition.x) / 2;
+		} else {
+			posX = sourcePosition.x - correctionCoef + (destinationPosition.x - sourcePosition.x) / 2;
+		}
         transform.position = new Vector3(
-            sourcePosition.x + (destinationPosition.x - sourcePosition.x) / 2,
+			posX,
             sourcePosition.y + (destinationPosition.y - sourcePosition.y) / 2,
             sourcePosition.z + (destinationPosition.z - sourcePosition.z) / 2);
 

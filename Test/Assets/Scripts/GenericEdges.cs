@@ -55,14 +55,16 @@ public class GenericEdges : MonoBehaviour {
 		Vector3 startPos = start.transform.position;
 		Vector3 startScale = start.transform.localScale;
 		if (startPos.x < endPosX) {
-			return new Vector3 (startPos.x + startScale.x / 2, startPos.y);
+			return new Vector3 (startPos.x + startScale.x / 2, startPos.y, startPos.z);
 		} else {
-			return new Vector3 (startPos.x - startScale.x / 2, startPos.y);
+			return new Vector3 (startPos.x - startScale.x / 2, startPos.y, startPos.z);
 		}
 	}
 
 	private void configureArrow(Vector3 start, Vector3 end){
-		Vector3 position = (start+end)/2;
+		Vector3 position = start;
+		position.x = (start.x+end.x)/2;
+		position.y = (start.y+end.y)/2;
 		float scaleX = Mathf.Sqrt (Mathf.Pow(end.y-start.y,2)+Mathf.Pow(end.x-start.x,2));
 		float rotationZ = Mathf.Rad2Deg * Mathf.Acos ((end.x-start.x)/scaleX);
 		if (start.y >end.y) {
