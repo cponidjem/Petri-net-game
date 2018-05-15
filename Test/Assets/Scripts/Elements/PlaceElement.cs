@@ -15,10 +15,14 @@ public class PlaceElement : GameElement {
 	{
         float angleIncrease = (2 * Mathf.PI) / initialMarking;
         float distanceFromCenter = 0.5F;
-        for (int i = 0; i < initialMarking; i++) {
-			GameObject newToken = GameObject.Instantiate (token, transform);
+        for (int i = 0; i < initialMarking; i++)
+        {
+            GameObject newToken = GameObject.Instantiate(token, transform);
             newToken.transform.position = transform.position;
-            newToken.transform.position += new Vector3(Mathf.Sin(angleIncrease*i)* distanceFromCenter, Mathf.Cos(angleIncrease*i)*distanceFromCenter);
+            if (initialMarking > 1)
+            {
+                newToken.transform.position += new Vector3(Mathf.Sin(angleIncrease * i) * distanceFromCenter, Mathf.Cos(angleIncrease * i) * distanceFromCenter);
+            }
         }
 		//numberOfTokensText = Instantiate(numberOfTokensText, transform.position,transform.rotation, game.GetComponentInChildren<Canvas>().transform);
 		//numberOfTokensText.GetComponent<UnityEngine.UI.Text>().text = marking.ToString();
@@ -35,10 +39,14 @@ public class PlaceElement : GameElement {
 		}
         float angleIncrease = (2 * Mathf.PI) / newMarking;
         float distanceFromCenter = 0.5F;
-        for (int i = 0; i < newMarking; i++) {
-			GameObject newToken = GameObject.Instantiate (token, transform);
+        for (int i = 0; i < newMarking; i++)
+        {
+            GameObject newToken = GameObject.Instantiate(token, transform);
             newToken.transform.position = transform.position;
-            newToken.transform.position += new Vector3(Mathf.Sin(angleIncrease * i) * distanceFromCenter, Mathf.Cos(angleIncrease * i) * distanceFromCenter);
+            if (newMarking > 1)
+            {
+                newToken.transform.position += new Vector3(Mathf.Sin(angleIncrease * i) * distanceFromCenter, Mathf.Cos(angleIncrease * i) * distanceFromCenter);
+            }
         }
 
 	}

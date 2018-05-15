@@ -17,18 +17,17 @@ public class ArcElement : GameElement
     void Start()
     {
         // Place the arc between place and transition
-        Vector3 sourcePosition = place.getPosition();
-        Vector3 destinationPosition = transition.getPosition();
-		float correctionCoef = 0.45f;
+        float angle = Vector3.SignedAngle(place.getPosition() - transition.getPosition(), Vector3.right, Vector3.forward);
+        float angleRad = Mathf.Deg2Rad * angle;
+        float r = 1F;
+        float transitionWidth = 0.1F;
 
-		float posX = 0.0f;
-		if (type == ConditionType.PRECONDITION) {
-			posX = sourcePosition.x + correctionCoef + (destinationPosition.x - sourcePosition.x) / 2;
-		} else {
-			posX = sourcePosition.x - correctionCoef + (destinationPosition.x - sourcePosition.x) / 2;
-		}
+        Vector3 sourcePosition = place.getPosition() + new Vector3(-Mathf.Cos(angleRad) * r, Mathf.Sin(angleRad) * r);
+        Vector3 destinationPosition = transition.getPosition() +
+            new Vector3(transitionWidth * Mathf.Sign(place.getPosition().x - transition.getPosition().x), 0);
+
         transform.position = new Vector3(
-			posX,
+            sourcePosition.x + (destinationPosition.x - sourcePosition.x) / 2,
             sourcePosition.y + (destinationPosition.y - sourcePosition.y) / 2,
             sourcePosition.z + (destinationPosition.z - sourcePosition.z) / 2);
 
@@ -49,14 +48,31 @@ public class ArcElement : GameElement
         }
         Vector3 rotationChange = new Vector3(0, 0, z_angle_deg);
         transform.Rotate(rotationChange);
+        // Scale the arc according to the distance
+        float distance = Vector3.Distance(sourcePosition, destinationPosition);
+        float scaleFactor = distance / 2;
+        transform.localScale = new Vector3(transform.localScale.x * scaleFactor, transform.localScale.y);
+
         // Initialise coefficient text
-        coefficientText = Instantiate(coefficientText, transform.position, transform.rotation, game.GetComponentInChildren<Canvas>().transform);
+        coefficientText = Instantiate(coefficientText, game.GetComponentInChildren<Canvas>().transform);
         coefficientText.GetComponent<UnityEngine.UI.Text>().text = coeff.ToString();
+
+        // Move text to its right place + arbitrary numbers added to tune position
+        float transformSign = Mathf.Sign(place.getPosition().x - transition.getPosition().x);
+        if (type == ConditionType.POSTCONDITION)
+        {
+            coefficientText.transform.position = place.getPosition() +
+                new Vector3(-Mathf.Cos(angleRad + transformSign * 0.2F) * 1.5F * r, Mathf.Sin(angleRad + transformSign * 0.2F) * 1.5F * r);
+        }
+        else
+        {
+            coefficientText.transform.position = transition.getPosition() +
+            new Vector3(5.5F * transitionWidth * transformSign, 0.3F);
+        }
     }
     // Update the text to correspond to marking.
     void Update()
     {
         coefficientText.GetComponent<UnityEngine.UI.Text>().text = coeff.ToString();
-        coefficientText.transform.position = transform.position;
     }
 }
