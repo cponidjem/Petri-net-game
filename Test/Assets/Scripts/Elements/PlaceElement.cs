@@ -31,7 +31,8 @@ public class PlaceElement : GameElement {
 		}
 		for (int i = 0; i < newMarking; i++) {
 			GameObject newToken = GameObject.Instantiate (token, transform);
-		}
+            //newToken.transform.position += Vector3.down * i * 100;
+        }
 
 	}
 
