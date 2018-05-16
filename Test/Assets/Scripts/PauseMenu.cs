@@ -15,6 +15,15 @@ public class PauseMenu : MonoBehaviour {
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = false;
+        if (OpenPanels != null)
+        {
+            foreach (GameObject go in OpenPanels)
+            {
+                go.SetActive(true);
+                //go.GetComponent<TouchScript>().enabled = false;
+                //go.collider.enabled = false;
+            }
+        }
     }
 
     public void Pause()
@@ -36,14 +45,12 @@ public class PauseMenu : MonoBehaviour {
 
     public void LoadMainScreen()
     {
-        Debug.Log("Loading Main screen...");
         Time.timeScale = 1f;
         SceneManager.LoadSceneAsync("MainMenu");
     }
 
     public void Quit()
     {
-        Debug.Log("Quitting game...");
         Application.Quit();
     }
 }
