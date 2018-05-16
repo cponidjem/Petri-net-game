@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 199431848221610168}
   - component: {fileID: 114264537470795758}
   m_Layer: 0
-  m_Name: TransitionExplosion
+  m_Name: WinningScreenExplosion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
