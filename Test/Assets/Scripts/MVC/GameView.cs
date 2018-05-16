@@ -86,7 +86,9 @@ public class GameView : GameElement {
     }
 
 	public void winningScreen(){
-        Instantiate(winningScreenExplosion);
+        Vector3 position = GameObject.Find("Main Camera").transform.position;
+        GameObject fireworks = Instantiate(winningScreenExplosion,transform);
+        fireworks.transform.position = position;
     }
 
 
