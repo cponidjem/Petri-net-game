@@ -47,6 +47,7 @@ public class GameView : GameElement {
         foreach (Transition newTransition in newTransitions)
         {
             transitions[newTransition.id].changeConditions(newTransition.preconditions, newTransition.postconditions, places);
+            updateTransitionStateColor(newTransition.id, game.model.canPerformFire(newTransition.id)); // Not the best way to do it...
         }
     }
 
@@ -85,11 +86,11 @@ public class GameView : GameElement {
         return transitions;
     }
 
+    // Display winning screen + fireworks animations
 	public void winningScreen(){
         Vector3 position = GameObject.Find("Main Camera").transform.position;
         var cam = Camera.main;
         var p1 = cam.ViewportToWorldPoint(new Vector3(0, 0, cam.nearClipPlane));
-        Debug.Log(p1);
 
         for (float f = p1.x; f < -p1.x; f = f - p1.x/2)
         {
@@ -97,6 +98,12 @@ public class GameView : GameElement {
             fireworks.transform.position = position;
             fireworks.transform.position += f * Vector3.right - p1.y * Vector3.down+ Vector3.forward * 5F;
         }
+    }
+
+    // Change transition color according to its state
+    public void updateTransitionStateColor(int transitionId, bool newState)
+    {
+        transitions[transitionId].changeStatusColor(newState);
     }
 
 

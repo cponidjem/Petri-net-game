@@ -31,7 +31,6 @@ public class PlaceElement : GameElement {
 
 	// Update the tokens to correspond to marking.
 	public void changeMarking(int newMarking){
-		Debug.Log ("Changing Marking");
 		foreach (Transform child in this.transform) {
 			if (child.tag == "Token") {
 				Destroy (child.gameObject);

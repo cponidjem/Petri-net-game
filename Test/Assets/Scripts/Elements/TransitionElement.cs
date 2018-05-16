@@ -12,10 +12,16 @@ public class TransitionElement : GameElement {
 	public GameObject arcPrefab;
 	public GameObject transitionExplosion;
 
-	// Create arcs corresponding to given pre/postconditions
-	void Start()
+    // for color changes
+    private float startTime;
+    private float[] startColor = new float[3] { 1f, 1f, 1f };
+    private float[] endColor = new float[3] { 1f, 1f, 1f };
+
+    // Create arcs corresponding to given pre/postconditions
+    void Start()
 	{
-		ArcElement arc = arcPrefab.GetComponent<ArcElement>();
+        startTime = Time.time;
+        ArcElement arc = arcPrefab.GetComponent<ArcElement>();
 		arc.transition = this;
 		int i = 0;
 		foreach (PlaceElement p in preconditions)
@@ -116,6 +122,29 @@ public class TransitionElement : GameElement {
             ++i;
             Instantiate(arc, this.transform);
         }
+    }
+
+    // Change color according to status
+    public void changeStatusColor(bool newState)
+    {
+        startTime = Time.time;
+        startColor = endColor;
+        if (newState)
+        {
+            endColor = new float[3] { 0f, 1f, 0f };  
+        }
+        else
+        {
+            endColor = new float[3] { 1f, 1f, 1f };
+        }
+    }
+
+    public void Update()
+    {
+        float duration = 1f;
+        float t = (Time.time - startTime) / duration;
+        transform.GetComponent<SpriteRenderer>().color = new Color(Mathf.SmoothStep(startColor[0], endColor[0], t), 
+            Mathf.SmoothStep(startColor[1], endColor[1], t), Mathf.SmoothStep(startColor[2], endColor[2], t), 1);
     }
 
 }

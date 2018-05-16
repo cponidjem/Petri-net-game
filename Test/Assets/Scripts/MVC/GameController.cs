@@ -30,7 +30,7 @@ public class GameController : GameElement {
 
         // Initialise game model using the scene
 		game.model.initialisation(game.view.getPlaces(), game.view.getTransitions(),memory.getEndPlaces());
-
+        game.view.updateTransitions(game.view.getTransitions());
 
     }
 
@@ -49,15 +49,15 @@ public class GameController : GameElement {
 
             // Update graphics
 			game.view.updatePlaces(places);
+            game.view.updateTransitions(game.view.getTransitions());
 
             // If end is reached, memorize last level completed
-			if (game.model.targetPetriNetReached ()) {
+            if (game.model.targetPetriNetReached ()) {
 				game.view.winningScreen ();
 				Debug.Log ("End reached.");
                 MemoryScript memory = GameObject.FindObjectOfType<MemoryScript>();
                 int lastLevelCompleted = int.Parse(SceneManager.GetActiveScene().name.Substring("Level_".Length));
                 memory.setLastLevelCompleted(lastLevelCompleted);
-
             }
 
             
@@ -75,7 +75,6 @@ public class GameController : GameElement {
         {
             transitions = game.model.performAddArc(transitionId, placeId, direction);
             game.view.updateTransitions(transitions);
-
         }
         else
         {

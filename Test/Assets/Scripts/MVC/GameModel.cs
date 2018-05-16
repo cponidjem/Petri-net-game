@@ -57,8 +57,6 @@ public class Transition
                 {
                     if (precondition.coeff > place.marking)
                     {
-                        Debug.Log(precondition.coeff);
-                        Debug.Log(place.marking);
                         return false;
                     }
                     break;
