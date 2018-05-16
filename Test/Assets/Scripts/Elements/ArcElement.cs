@@ -71,6 +71,7 @@ public class ArcElement : GameElement
         }
     }
     // Update the text to correspond to marking.
+    // Not necessary I think
     void Update()
     {
         coefficientText.GetComponent<UnityEngine.UI.Text>().text = coeff.ToString();

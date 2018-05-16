@@ -29,7 +29,7 @@ public class PlaceElement : GameElement {
 	}
 
 
-	// Update the text to correspond to marking.
+	// Update the tokens to correspond to marking.
 	public void changeMarking(int newMarking){
 		Debug.Log ("Changing Marking");
 		foreach (Transform child in this.transform) {

@@ -6,6 +6,7 @@ using UnityEngine;
 public class MemoryScript : MonoBehaviour {
 
     private List<Place> targetPlaces;
+    private int lastLevelCompleted;
 
 	public List<Place> getEndPlaces(){
 		return targetPlaces;
@@ -19,6 +20,11 @@ public class MemoryScript : MonoBehaviour {
     public void setEndPlaces(List<Place> places)
     {
         this.targetPlaces = places;
+    }
+
+    public void setLastLevelCompleted(int level)
+    {
+        this.lastLevelCompleted = level;
     }
 
     // Update is called once per frame

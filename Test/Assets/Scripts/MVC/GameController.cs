@@ -13,17 +13,18 @@ public class GameController : GameElement {
         string sceneName = SceneManager.GetActiveScene().name;
         MemoryScript memory = GameObject.FindObjectOfType<MemoryScript>();
         if (!sceneName.EndsWith("_end") && memory == null){
+            // Scene used to load end scene and then load back the real scene
             string endSceneName = sceneName + "_end";
             SceneManager.LoadSceneAsync(endSceneName);
             memory = Instantiate<MemoryScript>(memoryPrefab.GetComponent<MemoryScript>());
             SceneManager.LoadSceneAsync(sceneName);
         }
         else if (sceneName.EndsWith("_end")) {
-            Debug.Log("Scene used only for setting the end.");
+            //Scene used only for setting the end
             memory.setEndPlaces(game.view.getPlaces());
         }
         else{
-            Debug.Log("Unnecessary replica");
+            //Scene that we use to play
         }
 
 
@@ -49,11 +50,15 @@ public class GameController : GameElement {
             // Update graphics
 			game.view.updatePlaces(places);
 
+            // If end is reached, memorize last level completed
 			if (game.model.targetPetriNetReached ()) {
 				game.view.winningScreen ();
-				Debug.Log ("end reached");
-				//game.controller.OnResetClicked ();
-			}
+				Debug.Log ("End reached.");
+                MemoryScript memory = GameObject.FindObjectOfType<MemoryScript>();
+                int lastLevelCompleted = int.Parse(SceneManager.GetActiveScene().name.Substring("Level_".Length));
+                memory.setLastLevelCompleted(lastLevelCompleted);
+
+            }
 
             
         } else

@@ -6,7 +6,9 @@ public class GameView : GameElement {
 	PlaceElement[] places;
 	TransitionElement[] transitions;
 
-	void Start(){
+    public GameObject winningScreenExplosion;
+
+    void Start(){
 		places = new PlaceElement[this.GetComponentsInChildren<PlaceElement>().Length];
 		transitions = new TransitionElement[this.GetComponentsInChildren<TransitionElement>().Length];
 
@@ -36,6 +38,12 @@ public class GameView : GameElement {
     // Add the new arc.
     public void updateTransitions(List<Transition> newTransitions)
     {
+        // Destroy all textLabels before recreating them
+        GameObject[] others = GameObject.FindGameObjectsWithTag("coefficientText");
+        foreach (GameObject other in others)
+        { Destroy(other); }
+
+
         foreach (Transition newTransition in newTransitions)
         {
             transitions[newTransition.id].changeConditions(newTransition.preconditions, newTransition.postconditions, places);
@@ -78,7 +86,8 @@ public class GameView : GameElement {
     }
 
 	public void winningScreen(){
-	}
+        Instantiate(winningScreenExplosion);
+    }
 
 
 }
