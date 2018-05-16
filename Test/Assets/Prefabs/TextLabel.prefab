@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 114256451727271002}
   m_Layer: 5
   m_Name: TextLabel
-  m_TagString: Untagged
+  m_TagString: coefficientText
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
