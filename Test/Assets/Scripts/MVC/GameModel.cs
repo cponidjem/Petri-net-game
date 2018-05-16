@@ -30,11 +30,21 @@ public class Transition
     public List<Arc> preconditions;
     public List<Arc> postconditions;
 
+	private void cloneArcsList(ref List<Arc> cloneArcs, List<Arc> arcs){
+		Arc temp;
+		foreach (Arc arc in arcs) {
+			temp = new Arc (arc.idPlace, arc.coeff);
+			cloneArcs.Add (temp);
+		}
+	}
+
     public Transition(int id, List<Arc> preconditions, List<Arc> postconditions)
     {
         this.id = id;
-        this.preconditions = preconditions;
-        this.postconditions = postconditions;
+		this.preconditions = new List<Arc>();
+		cloneArcsList (ref this.preconditions, preconditions);
+		this.postconditions = new List<Arc>();
+		cloneArcsList (ref this.postconditions, postconditions);
     }
 
     public bool isEnabled(List<Place> places)
@@ -85,23 +95,49 @@ public class Transition
 
 public class GameModel : GameElement
 {
+	private List<Place> initialPlaces;
+	private List<Transition> initialTransitions;
+
     private List<Place> places;
     private List<Transition> transitions;
 
     private List<Place> targetPlaces;
 
+	private void clonePlacesList(ref List<Place> clonePlaces, List<Place> places){
+		Place temp;
+		foreach (Place place in places) {
+			temp = new Place (place.id, place.marking);
+			clonePlaces.Add (temp);
+		}
+	}
+
+	private void cloneTransitionsList(ref List<Transition> cloneTransitions, List<Transition> transitions){
+		Transition temp;
+		foreach (Transition transition in transitions) {
+			temp = new Transition (transition.id, transition.preconditions, transition.postconditions); 
+			cloneTransitions.Add (temp);
+		}
+	}
+
 	public void initialisation(List<Place> places, List<Transition> transitions, List<Place> targetPlaces)
     {
-        this.places = places;
-        this.transitions = transitions;
-		this.targetPlaces = targetPlaces;
-    }
+		this.places = new List<Place> ();
+		clonePlacesList (ref this.places, places);
 
-	/*public void initialisation(List<Place> places, List<Transition> transitions)
-	{
-		this.places = places;
-		this.transitions = transitions;
-	}*/
+		this.initialPlaces = new List<Place> ();
+		clonePlacesList (ref this.initialPlaces, places);
+
+		this.transitions = new List<Transition>();
+		cloneTransitionsList (ref this.transitions,transitions);
+
+		this.initialTransitions = new List<Transition>();
+		cloneTransitionsList (ref this.initialTransitions,transitions);
+
+		if (targetPlaces != null) {
+			this.targetPlaces = new List<Place> ();
+			clonePlacesList (ref this.targetPlaces, targetPlaces);
+		}
+    }
 
     public List<Place> performFire(int id)
     {
@@ -190,6 +226,19 @@ public class GameModel : GameElement
 		}
 		return true;
 	}
+
+	public List<Place> resetPlaces(){
+		places.Clear ();
+		clonePlacesList (ref places, initialPlaces);
+		return places;
+	}
+
+	public List<Transition> resetTransitions(){
+		transitions.Clear ();
+		cloneTransitionsList (ref transitions, initialTransitions);
+		return transitions;
+	}
+
 
 	/*void Start(){
 		places = new List<Place> ();

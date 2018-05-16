@@ -84,8 +84,12 @@ public class GameController : GameElement {
     }
 
 	public void OnResetClicked(){
-		string sceneName = SceneManager.GetActiveScene().name;
-		SceneManager.LoadSceneAsync(sceneName);
+		/*string sceneName = SceneManager.GetActiveScene().name;
+		SceneManager.LoadSceneAsync(sceneName);*/
+		List<Place> newPlaces = game.model.resetPlaces ();
+		List<Transition> newTransitions = game.model.resetTransitions ();
+		game.view.updatePlaces (newPlaces);
+		game.view.updateTransitions (newTransitions);
 		Debug.Log ("reset");
 	}
 
