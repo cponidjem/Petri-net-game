@@ -4,28 +4,72 @@ using UnityEngine;
 
 public class PlaceButtons : MonoBehaviour {
 
-    private RectTransform rt;
-    private RectTransform buttonrt;
-
-
     void Start () {
-        rt = GetComponent<RectTransform>();
-        Debug.Log(rt.name);
+
+        RectTransform rt = GetComponent<RectTransform>();
         Vector3[] v = new Vector3[4];
         rt.GetWorldCorners(v);
-        float width = v[2][0];
-        float height = v[2][1];
+        rt.GetLocalCorners(v);
+        float width = v[2][0]*2;
+        float height = v[2][1]*2;
+        float limit = Mathf.Min(new float[] { width, height });
 
-        float relativeDistanceFromTop = 0.05f;
-        float relativeDistanceFromLeft = 0.03f;
-        buttonrt = transform.GetChild(1).GetComponent<RectTransform>();
-        Debug.Log(buttonrt.name);
-        buttonrt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, height*relativeDistanceFromTop, 60);
-        buttonrt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, width * relativeDistanceFromLeft, 70);
+        // Play button
+        rt = transform.GetChild(0).GetComponent<RectTransform>();
+        rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, height / 2 - height / 26, height / 13);
+        rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, width / 2 - width / 8, width / 4);
 
-        buttonrt = transform.GetChild(0).GetComponent<RectTransform>();
-        Debug.Log(buttonrt.name);
-        buttonrt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, height/2, height/13);
-		buttonrt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, width/2-width/10, width/4-width/19);
+        // Menu button
+        rt = transform.GetChild(1).GetComponent<RectTransform>();
+        rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, limit/20, limit / 10);
+        rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, limit/20, limit / 10);
+
+        // SUB PANEL
+        rt = transform.GetChild(2).GetComponent<RectTransform>();
+        rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, height / 2 - height / 4, height / 2);
+        rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, width / 2 - width / 4, width / 2);
+
+        rt.GetLocalCorners(v);
+        width = v[2][0] * 2;
+        height = v[2][1] * 2;
+        limit = Mathf.Min(new float[]{ width,height});
+        // Sub panel button - music
+        rt = transform.GetChild(2).GetChild(0).GetComponent<RectTransform>();
+        rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, height / 3 - limit / 10, limit / 5);
+        rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, width / 4 - limit / 10, limit / 5);
+
+        // Sub panel button - volume
+        rt = transform.GetChild(2).GetChild(1).GetComponent<RectTransform>();
+        RectTransform volumeRt = rt;
+        rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, height / 3 - limit / 10, limit / 5);
+        rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, 2 * width / 4 - limit / 10, limit / 5);
+
+        // Sub panel button - trash
+        rt = transform.GetChild(2).GetChild(2).GetComponent<RectTransform>();
+        rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, height / 3 - limit / 10, limit / 5);
+        rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, 3 * width / 4 - limit / 10, limit / 5);
+
+        // Sub panel button - exit
+        rt = transform.GetChild(2).GetChild(3).GetComponent<RectTransform>();
+        rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, limit / 8, limit / 8);
+        rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Right, limit / 8, limit / 8);
+
+        // Sub panel button - quit
+        rt = transform.GetChild(2).GetChild(4).GetComponent<RectTransform>();
+        rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, 3 * height / 4 - limit / 16, limit / 8);
+        rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, width / 2 - limit / 4, limit / 2);
+
+        // Sub panel button - volume - slider
+        volumeRt.GetLocalCorners(v);
+        width = v[2][0] * 2;
+        height = v[2][1] * 2;
+        rt = transform.GetChild(2).GetChild(1).GetChild(0).GetComponent<RectTransform>();
+        rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, height + height / 5, height / 4);
+        rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, 0, width);
+    }
+
+    public void Update()
+    {
+        Start();
     }
 }
