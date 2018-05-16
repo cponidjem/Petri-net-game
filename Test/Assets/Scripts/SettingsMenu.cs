@@ -28,12 +28,12 @@ public class SettingsMenu : MonoBehaviour {
         if (PlayerPrefs.GetInt("Muted", 0) == 0)
         {
             AudioListener.volume = 1;
-            //musicButton.GetComponent<Image>().sprite = musicOnSprite;
+            musicButton.GetComponent<Image>().sprite = musicOnSprite;
         }
         else
         {
             AudioListener.volume = 0;
-            //musicButton.GetComponent<Image>().sprite = musicOffSprite;
+            musicButton.GetComponent<Image>().sprite = musicOffSprite;
         }
     }
 
