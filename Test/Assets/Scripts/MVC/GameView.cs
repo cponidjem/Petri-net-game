@@ -87,8 +87,16 @@ public class GameView : GameElement {
 
 	public void winningScreen(){
         Vector3 position = GameObject.Find("Main Camera").transform.position;
-        GameObject fireworks = Instantiate(winningScreenExplosion,transform);
-        fireworks.transform.position = position;
+        var cam = Camera.main;
+        var p1 = cam.ViewportToWorldPoint(new Vector3(0, 0, cam.nearClipPlane));
+        Debug.Log(p1);
+
+        for (float f = p1.x; f < -p1.x; f = f - p1.x/2)
+        {
+            GameObject fireworks = Instantiate(winningScreenExplosion, transform);
+            fireworks.transform.position = position;
+            fireworks.transform.position += f * Vector3.right - p1.y * Vector3.down+ Vector3.forward * 5F;
+        }
     }
 
 
