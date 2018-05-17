@@ -54,7 +54,8 @@ public class ArcElement : GameElement
         transform.localScale = new Vector3(transform.localScale.x * scaleFactor, transform.localScale.y);
 
         // Initialise coefficient text
-        coefficientText = Instantiate(coefficientText, game.GetComponentInChildren<Canvas>().transform);
+        coefficientText = Instantiate(coefficientText, game.GetComponentInChildren<Canvas>().transform.GetChild(0).transform);
+        
         coefficientText.GetComponent<UnityEngine.UI.Text>().text = coeff.ToString();
 
         // Move text to its right place + arbitrary numbers added to tune position

@@ -4,28 +4,31 @@ using UnityEngine;
 
 public class PlaceButtonsLevels : MonoBehaviour {
 
-	private RectTransform rt;
-	private RectTransform buttonrt;
 
 
 	void Start () {
-		rt = GetComponent<RectTransform>();
+        RectTransform rt = GetComponent<RectTransform>();
 		Vector3[] v = new Vector3[4];
-		rt.GetWorldCorners(v);
-		float width = v[2][0];
-		float height = v[2][1];
+        rt.GetLocalCorners(v);
+        float width = v[2][0] * 2;
+        float height = v[2][1] * 2;
+        float limit = Mathf.Min(new float[] { width, height });
 
-		float relativeDistanceFromTop = 10f;
-		float relativeDistanceFromLeft = 7f;
-		buttonrt = transform.GetChild(0).GetComponent<RectTransform>();
-		Debug.Log(buttonrt.name);
-		buttonrt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, height*relativeDistanceFromTop, 60);
-		buttonrt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, width * relativeDistanceFromLeft, 70);
+        // Menu button
+        rt = transform.GetChild(1).GetComponent<RectTransform>();
+        rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, limit / 20, limit / 10);
+        rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, limit / 20, limit / 10);
 
-		buttonrt = transform.GetChild(2).GetComponent<RectTransform>();
-		Debug.Log(buttonrt.name);
-		buttonrt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, height*relativeDistanceFromTop-20, 95);
-		buttonrt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, width * relativeDistanceFromLeft+130,105);
-	}
+        // Reset button
+        rt = transform.GetChild(2).GetComponent<RectTransform>();
+        rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Bottom, limit / 20, limit / 10);
+        rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Right, limit / 20, limit / 10);
+
+        // Help button
+        rt = transform.GetChild(3).GetComponent<RectTransform>();
+        rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, limit / 20, limit / 10);
+        rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Right, limit / 20, limit / 10);
+
+    }
 }
 
