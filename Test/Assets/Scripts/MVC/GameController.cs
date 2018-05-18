@@ -12,12 +12,12 @@ public class GameController : GameElement {
         // Initialize level ending using another scene
         string sceneName = SceneManager.GetActiveScene().name;
         MemoryScript memory = GameObject.FindObjectOfType<MemoryScript>();
-        if (!sceneName.EndsWith("_end") && memory == null){
+		if (!sceneName.EndsWith("_end") && !memory.getLoaded()){
             // Scene used to load end scene and then load back the real scene
             string endSceneName = sceneName + "_end";
-            SceneManager.LoadSceneAsync(endSceneName);
-            memory = Instantiate<MemoryScript>(memoryPrefab.GetComponent<MemoryScript>());
-            SceneManager.LoadSceneAsync(sceneName);
+			memory.setLoaded (true);
+			SceneManager.LoadSceneAsync(endSceneName);
+			SceneManager.LoadSceneAsync(sceneName);
         }
         else if (sceneName.EndsWith("_end")) {
             //Scene used only for setting the end
@@ -25,6 +25,7 @@ public class GameController : GameElement {
         }
         else{
             //Scene that we use to play
+			memory.setLoaded(false);
         }
 
 

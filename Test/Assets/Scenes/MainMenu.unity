@@ -1078,7 +1078,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 144b538c19920ec4f830e15a605438ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextSceneID: 1
 --- !u!114 &839852234
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1090,6 +1089,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f17eacf1696d614b84cfe516c92fea9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  memoryPrefab: {fileID: 1176278924099082, guid: e173e70726e3b6a47aa9b74d0797003d,
+    type: 2}
 --- !u!1 &850036982
 GameObject:
   m_ObjectHideFlags: 0
@@ -1310,11 +1311,11 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 839852233}
         m_MethodName: ChangeScene
-        m_Mode: 1
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0

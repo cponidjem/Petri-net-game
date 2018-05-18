@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using System;
 
 public class ButtonMainMenu : MonoBehaviour {
-
+	public GameObject memoryPrefab;
 	private bool panelOpened = false;
 
 	private GameObject SubPanel = null;
@@ -16,7 +16,10 @@ public class ButtonMainMenu : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
+		MemoryScript memory = GameObject.FindObjectOfType<MemoryScript>();
+		if (memory == null) {
+			memory = Instantiate<MemoryScript>(memoryPrefab.GetComponent<MemoryScript>());
+		}
 	}
 
 	// Update is called once per frame

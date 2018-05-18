@@ -10,6 +10,15 @@ public class MemoryScript : MonoBehaviour
 {
     private List<Place> targetPlaces;
     private int lastLevelCompleted;
+	private bool loaded = false;
+
+	public bool getLoaded() {
+		return loaded;
+	}
+
+	public void setLoaded(bool state){
+		loaded = state;
+	}
 
     public List<Place> getEndPlaces()
     {
@@ -20,13 +29,19 @@ public class MemoryScript : MonoBehaviour
     void Start()
     {
         DontDestroyOnLoad(this.gameObject);
-        Load();
+		lastLevelCompleted = 0;
+        //Load();
     }
 
     public void setEndPlaces(List<Place> places)
     {
         this.targetPlaces = places;
     }
+
+	public int getLastLevelCompleted()
+	{
+		return this.lastLevelCompleted;
+	}
 
     public void setLastLevelCompleted(int level)
     {
