@@ -9,6 +9,7 @@ TagManager:
   - Token
   - InstructionsPanel
   - coefficientText
+  - BackgroundImage
   layers:
   - Default
   - TransparentFX

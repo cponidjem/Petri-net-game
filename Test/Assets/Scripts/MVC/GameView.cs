@@ -7,6 +7,7 @@ public class GameView : GameElement {
 	TransitionElement[] transitions;
 
     public GameObject winningScreenExplosion;
+    public GameObject winningPanel;
 
     void Start(){
 		places = new PlaceElement[this.GetComponentsInChildren<PlaceElement>().Length];
@@ -98,6 +99,8 @@ public class GameView : GameElement {
             fireworks.transform.position = position;
             fireworks.transform.position += f * Vector3.right - p1.y * Vector3.down+ Vector3.forward * 5F;
         }
+
+        winningPanel.SetActive(true);
     }
 
     // Change transition color according to its state
