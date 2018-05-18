@@ -16,13 +16,13 @@ public class PlaceButtons : MonoBehaviour {
 
         // Play button
         rt = transform.GetChild(0).GetComponent<RectTransform>();
-        rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, height / 2 - height / 26, height / 13);
-        rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, width / 2 - width / 8, width / 4);
+        rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, height / 2 - limit / 30, limit / 15);
+        rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, width / 2 - limit / 6, limit / 3);
 
         // Menu button
         rt = transform.GetChild(1).GetComponent<RectTransform>();
-        rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, limit/20, limit / 10);
-        rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, limit/20, limit / 10);
+        rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, limit/24, limit / 12);
+        rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, limit/24, limit / 12);
 
         // SUB PANEL
         rt = transform.GetChild(2).GetComponent<RectTransform>();
@@ -51,8 +51,8 @@ public class PlaceButtons : MonoBehaviour {
 
         // Sub panel button - exit
         rt = transform.GetChild(2).GetChild(3).GetComponent<RectTransform>();
-        rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, limit / 8, limit / 8);
-        rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Right, limit / 8, limit / 8);
+        rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, limit / 10, limit / 10);
+        rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Right, limit / 8, limit / 10);
 
         // Sub panel button - quit
         rt = transform.GetChild(2).GetChild(4).GetComponent<RectTransform>();
