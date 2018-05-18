@@ -1078,6 +1078,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 144b538c19920ec4f830e15a605438ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  chosenShader: {fileID: 4800000, guid: e2cb89c052f7f4fe9a99490c78635ea3, type: 3}
 --- !u!114 &839852234
 MonoBehaviour:
   m_ObjectHideFlags: 0

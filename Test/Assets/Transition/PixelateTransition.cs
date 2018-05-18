@@ -24,13 +24,14 @@ namespace Prime31.TransitionKit
 		public float pixelatedDelay = 0f;
 		public PixelateFinalScaleEffect finalScaleEffect = PixelateFinalScaleEffect.ToPoint;
 		public int nextScene = -1;
+        public Shader usedShader = null;
 
 
 		#region TransitionKitDelegate
 
 		public Shader shaderForTransition()
 		{
-			return Shader.Find("prime[31]/Transitions/Pixelate" );
+            return usedShader;
 		}
 
 
