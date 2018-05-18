@@ -16,18 +16,18 @@ public class PlaceButtons : MonoBehaviour {
 
         // Play button
         rt = transform.GetChild(0).GetComponent<RectTransform>();
-        rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, height / 2 - limit / 30, limit / 15);
-        rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, width / 2 - limit / 6, limit / 3);
+        rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, height / 2 - limit / 20, limit / 10);
+        rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, width / 2 - limit / 4, limit / 2);
 
         // Menu button
         rt = transform.GetChild(1).GetComponent<RectTransform>();
-        rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, limit/24, limit / 12);
-        rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, limit/24, limit / 12);
+        rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, limit/16, limit / 8);
+        rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, limit/16, limit / 8);
 
         // SUB PANEL
         rt = transform.GetChild(2).GetComponent<RectTransform>();
-        rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, height / 2 - height / 4, height / 2);
-        rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, width / 2 - width / 4, width / 2);
+        rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, 0.1f * height, 0.8f * height);
+        rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, 0.1f * width, 0.8f * width);
 
         rt.GetLocalCorners(v);
         width = v[2][0] * 2;
@@ -35,18 +35,18 @@ public class PlaceButtons : MonoBehaviour {
         limit = Mathf.Min(new float[]{ width,height});
         // Sub panel button - music
         rt = transform.GetChild(2).GetChild(0).GetComponent<RectTransform>();
-        rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, height / 3 - limit / 10, limit / 5);
-        rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, width / 4 - limit / 10, limit / 5);
+        rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, height / 3 - limit / 8, limit / 4);
+        rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, width / 4 - limit / 8, limit / 4);
 
         // Sub panel button - volume
         rt = transform.GetChild(2).GetChild(1).GetComponent<RectTransform>();
         RectTransform volumeRt = rt;
-        rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, height / 3 - limit / 10, limit / 5);
-        rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, 2 * width / 4 - limit / 10, limit / 5);
+        rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, height / 3 - limit / 8, limit / 4);
+        rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, 2 * width / 4 - limit / 8, limit / 4);
 
         // Sub panel button - trash
         rt = transform.GetChild(2).GetChild(2).GetComponent<RectTransform>();
-        rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, height / 3 - limit / 10, limit / 5);
+        rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, height / 3 - limit / 8, limit / 4);
         rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, 3 * width / 4 - limit / 10, limit / 5);
 
         // Sub panel button - exit
@@ -59,13 +59,19 @@ public class PlaceButtons : MonoBehaviour {
         rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, 3 * height / 4 - limit / 16, limit / 8);
         rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, width / 2 - limit / 4, limit / 2);
 
+
         // Sub panel button - volume - slider
         volumeRt.GetLocalCorners(v);
         width = v[2][0] * 2;
         height = v[2][1] * 2;
+
         rt = transform.GetChild(2).GetChild(1).GetChild(0).GetComponent<RectTransform>();
+        rt.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 0.4f * height);
         rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Top, height + height / 5, height / 4);
-        rt.SetInsetAndSizeFromParentEdge(RectTransform.Edge.Left, 0, width);
+
+        // Handle size
+        transform.GetChild(2).GetChild(1).GetChild(0).GetChild(2).GetChild(0).GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 0.5f*height);
+        transform.GetChild(2).GetChild(1).GetChild(0).GetChild(2).GetChild(0).GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 0.4f * width);
     }
 
     public void Update()

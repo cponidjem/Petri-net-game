@@ -67,13 +67,5 @@ public class AudioManager : MonoBehaviour {
         }
             
         s.source.Play();
-    }*/
-
-    public void SetVolume(float volume)
-    {
-
-        myMusic.volume = mySlider.value;
-    }
-
-    
+    }*/   
 }
