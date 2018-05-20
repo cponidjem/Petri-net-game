@@ -10,8 +10,8 @@ public class LevelsMenu : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		MemoryScript memory = GameObject.FindObjectOfType<MemoryScript>();
-		GameObject canvas = GameObject.Find("Canvas");
-		Button[] levelButtons = canvas.GetComponentsInChildren<Button> ();
+		GameObject holder = GameObject.Find("LevelButtons");
+		Button[] levelButtons = holder.GetComponentsInChildren<Button> ();
 		//GameObject[] levelButtons = GameObject.FindGameObjectsWithTag ("LevelButton");
 		Debug.Log (memory);
 		int lastLevelCompleted = memory.getLastLevelCompleted ();
@@ -19,6 +19,7 @@ public class LevelsMenu : MonoBehaviour {
 		for (int i = 0; i < levelButtons.Length; i++) {
 			if (i+1 > lastLevelCompleted+1) {
 				levelButtons[i].GetComponent<Image> ().sprite = locker;
+				levelButtons [i].interactable = false;
 			}
 		}
 
