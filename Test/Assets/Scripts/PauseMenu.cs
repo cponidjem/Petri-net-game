@@ -51,6 +51,10 @@ public class PauseMenu : MonoBehaviour {
 
     public void Quit()
     {
+		MemoryScript memory = GameObject.FindObjectOfType<MemoryScript>();
+		if (memory != null) {
+			memory.Save ();
+		}
         Application.Quit();
     }
 }

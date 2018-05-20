@@ -30,7 +30,7 @@ public class MemoryScript : MonoBehaviour
     {
         DontDestroyOnLoad(this.gameObject);
 		lastLevelCompleted = 0;
-        //Load();
+        Load();
     }
 
     public void setEndPlaces(List<Place> places)

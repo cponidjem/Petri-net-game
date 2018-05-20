@@ -58,7 +58,10 @@ public class GameController : GameElement {
 				Debug.Log ("End reached.");
                 MemoryScript memory = GameObject.FindObjectOfType<MemoryScript>();
                 int lastLevelCompleted = int.Parse(SceneManager.GetActiveScene().name.Substring("Level_".Length));
-                memory.setLastLevelCompleted(lastLevelCompleted);
+				if (lastLevelCompleted > memory.getLastLevelCompleted()) {
+					memory.setLastLevelCompleted(lastLevelCompleted);
+				}
+                
             }
 
             
