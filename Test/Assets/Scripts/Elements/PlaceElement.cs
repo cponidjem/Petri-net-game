@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlaceElement : GameElement {
 
@@ -9,6 +10,8 @@ public class PlaceElement : GameElement {
 
 	public GameObject numberOfTokensText;
 	public GameObject token;
+    public bool addTokens = false;
+    public GameObject addTokensButton;
 
 	// Add text representing the marking.
 	void Start()
@@ -24,6 +27,14 @@ public class PlaceElement : GameElement {
                 newToken.transform.position += new Vector3(Mathf.Sin(angleIncrease * i) * distanceFromCenter, Mathf.Cos(angleIncrease * i) * distanceFromCenter);
             }
         }
+        if (addTokens)
+        {
+            addTokensButton = Instantiate(addTokensButton, game.GetComponentInChildren<Canvas>().transform.GetChild(0).transform);
+            addTokensButton.transform.position = transform.position + 1.35F*Vector3.up;
+            addTokensButton.GetComponent<Button>().onClick.AddListener(() => { game.controller.OnAddTokensClicked(this.id); });
+
+        }
+
 		//numberOfTokensText = Instantiate(numberOfTokensText, transform.position,transform.rotation, game.GetComponentInChildren<Canvas>().transform);
 		//numberOfTokensText.GetComponent<UnityEngine.UI.Text>().text = marking.ToString();
 	}

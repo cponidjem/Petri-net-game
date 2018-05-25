@@ -46,8 +46,8 @@ public class ArcElement : GameElement
         {
             z_angle_deg = z_angle_deg + 180;
         }
-        Vector3 rotationChange = new Vector3(0, 0, z_angle_deg);
-        transform.Rotate(rotationChange);
+
+        transform.rotation = Quaternion.AngleAxis(z_angle_deg, Vector3.forward);
         // Scale the arc according to the distance
         float distance = Vector3.Distance(sourcePosition, destinationPosition);
         float scaleFactor = distance / 2;
