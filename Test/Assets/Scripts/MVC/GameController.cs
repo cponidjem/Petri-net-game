@@ -22,6 +22,7 @@ public class GameController : GameElement {
         else if (sceneName.EndsWith("_end")) {
             //Scene used only for setting the end
             memory.setEndPlaces(game.view.getPlaces());
+			memory.setEndTransitions (game.view.getTransitions ());
         }
         else{
             //Scene that we use to play
@@ -30,7 +31,7 @@ public class GameController : GameElement {
 
 
         // Initialise game model using the scene
-		game.model.initialisation(game.view.getPlaces(), game.view.getTransitions(),memory.getEndPlaces());
+		game.model.initialisation(game.view.getPlaces(), game.view.getTransitions(),memory.getEndPlaces(),memory.getEndTransitions());
         game.view.updateTransitions(game.view.getTransitions());
 
     }
@@ -79,6 +80,20 @@ public class GameController : GameElement {
         {
             transitions = game.model.performAddArc(transitionId, placeId, direction);
             game.view.updateTransitions(transitions);
+			int lastLevelCompleted = int.Parse(SceneManager.GetActiveScene().name.Substring("Level_".Length));
+			if (lastLevelCompleted == 2) {
+				// If end is reached, memorize last level completed
+				if (game.model.targetPetriNetReached2 ()) {
+					game.view.winningScreen ();
+					Debug.Log ("End reached.");
+					MemoryScript memory = GameObject.FindObjectOfType<MemoryScript>();
+
+					if (lastLevelCompleted > memory.getLastLevelCompleted()) {
+						memory.setLastLevelCompleted(lastLevelCompleted);
+					}
+
+				}
+			}
         }
         else
         {
@@ -100,6 +115,17 @@ public class GameController : GameElement {
     {
         game.model.addTokens(placeId);
         game.view.updatePlaces(game.model.getPlaces());
+		// If end is reached, memorize last level completed
+		if (game.model.targetPetriNetReached ()) {
+			game.view.winningScreen ();
+			Debug.Log ("End reached.");
+			MemoryScript memory = GameObject.FindObjectOfType<MemoryScript>();
+			int lastLevelCompleted = int.Parse(SceneManager.GetActiveScene().name.Substring("Level_".Length));
+			if (lastLevelCompleted > memory.getLastLevelCompleted()) {
+				memory.setLastLevelCompleted(lastLevelCompleted);
+			}
+
+		}
     }
 
 }

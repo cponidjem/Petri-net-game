@@ -9,6 +9,7 @@ using System.IO;
 public class MemoryScript : MonoBehaviour
 {
     private List<Place> targetPlaces;
+	private List<Transition> targetTransitions;
     private int lastLevelCompleted;
 	private bool loaded = false;
 
@@ -24,6 +25,16 @@ public class MemoryScript : MonoBehaviour
     {
         return targetPlaces;
     }
+
+	public List<Transition> getEndTransitions()
+	{
+		return targetTransitions;
+	}
+
+	public void setEndTransitions(List<Transition> transitions)
+	{
+		this.targetTransitions = transitions;
+	}
 
     // Use this for initialization
     void Start()

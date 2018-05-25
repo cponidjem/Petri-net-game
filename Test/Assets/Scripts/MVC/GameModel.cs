@@ -93,6 +93,29 @@ public class Transition
         }
         return places;
     }
+
+	public bool isTheSame(Transition transition){
+		if (preconditions.Count != transition.preconditions.Count) {
+			return false;
+		} else {
+			for (int i = 0; i < preconditions.Count; i++) {
+				if (!(preconditions [i].idPlace == transition.preconditions [i].idPlace && preconditions [i].coeff == transition.preconditions [i].coeff)) {
+					return false;
+				}
+			}
+			if (postconditions.Count != transition.postconditions.Count) {
+				return false;
+			} else {
+				for (int i = 0; i < postconditions.Count; i++) {
+					if (!(postconditions [i].idPlace == transition.postconditions [i].idPlace && postconditions [i].coeff == transition.postconditions [i].coeff)) {
+						return false;
+					}
+				}
+			}
+		}
+		return true;
+
+	}
 }
 
 public class GameModel : GameElement
@@ -104,6 +127,7 @@ public class GameModel : GameElement
     private List<Transition> transitions;
 
     private List<Place> targetPlaces;
+	private List<Transition> targetTransitions;
 
 	private void clonePlacesList(ref List<Place> clonePlaces, List<Place> places){
 		Place temp;
@@ -121,7 +145,7 @@ public class GameModel : GameElement
 		}
 	}
 
-	public void initialisation(List<Place> places, List<Transition> transitions, List<Place> targetPlaces)
+	public void initialisation(List<Place> places, List<Transition> transitions, List<Place> targetPlaces, List<Transition> targetTransitions)
     {
 		this.places = new List<Place> ();
 		clonePlacesList (ref this.places, places);
@@ -138,6 +162,11 @@ public class GameModel : GameElement
 		if (targetPlaces != null) {
 			this.targetPlaces = new List<Place> ();
 			clonePlacesList (ref this.targetPlaces, targetPlaces);
+		}
+
+		if (targetTransitions != null) {
+			this.targetTransitions = new List<Transition> ();
+			cloneTransitionsList (ref this.targetTransitions,targetTransitions);
 		}
     }
 
@@ -220,6 +249,20 @@ public class GameModel : GameElement
 			foreach(Place place in places){
 				if(targetPlace.id == place.id){
 					if (targetPlace.marking != place.marking) {
+						return false;
+					}
+					break;
+				}
+			}
+		}
+		return true;
+	}
+
+	public bool targetPetriNetReached2(){
+		foreach(Transition targetTransition in  targetTransitions){
+			foreach(Transition transition in transitions){
+				if(targetTransition.id == transition.id){
+					if (!targetTransition.isTheSame(transition)) {
 						return false;
 					}
 					break;
