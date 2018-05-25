@@ -96,4 +96,10 @@ public class GameController : GameElement {
 		Debug.Log ("reset");
 	}
 
+    public void OnAddTokensClicked(int placeId)
+    {
+        game.model.addTokens(placeId);
+        game.view.updatePlaces(game.model.getPlaces());
+    }
+
 }

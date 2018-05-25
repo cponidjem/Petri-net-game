@@ -11,6 +11,10 @@ public class Place
         this.id = id;
         this.marking = marking;
     }
+    public void addToken()
+    {
+        this.marking += 1;
+    }
 }
 
 public class Arc
@@ -236,6 +240,18 @@ public class GameModel : GameElement
 		cloneTransitionsList (ref transitions, initialTransitions);
 		return transitions;
 	}
+
+    public void addTokens(int id)
+    {
+        foreach (Place place in places)
+        {
+            if (place.id == id)
+            {
+                place.addToken();
+                break;
+            }
+        }
+    }
 
 
 	/*void Start(){
