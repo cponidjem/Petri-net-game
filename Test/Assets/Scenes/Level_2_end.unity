@@ -204,6 +204,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4eb886833c35fc648ab4bf21c3416735, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  winningScreenExplosion: {fileID: 0}
+  winningPanel: {fileID: 0}
 --- !u!114 &57636025
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -415,7 +417,6 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 631112107}
   - {fileID: 515692140}
   m_Father: {fileID: 57636023}
   m_RootOrder: 0
@@ -522,17 +523,6 @@ Transform:
   m_Father: {fileID: 57636023}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &631112107 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 4422855556455150, guid: 700f95d06b429e84eabe4b26edea6bb9,
-    type: 2}
-  m_PrefabInternal: {fileID: 1365006171}
---- !u!114 &631112109 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114858495766937366, guid: 700f95d06b429e84eabe4b26edea6bb9,
-    type: 2}
-  m_PrefabInternal: {fileID: 1365006171}
-  m_Script: {fileID: 11500000, guid: 872ef15f35cd6cd48b95b324927aa417, type: 3}
 --- !u!1 &737903621
 GameObject:
   m_ObjectHideFlags: 0
@@ -800,58 +790,6 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
---- !u!1001 &1365006171
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 336232853}
-    m_Modifications:
-    - target: {fileID: 4422855556455150, guid: 700f95d06b429e84eabe4b26edea6bb9, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 3.01
-      objectReference: {fileID: 0}
-    - target: {fileID: 4422855556455150, guid: 700f95d06b429e84eabe4b26edea6bb9, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: -0.01
-      objectReference: {fileID: 0}
-    - target: {fileID: 4422855556455150, guid: 700f95d06b429e84eabe4b26edea6bb9, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4422855556455150, guid: 700f95d06b429e84eabe4b26edea6bb9, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4422855556455150, guid: 700f95d06b429e84eabe4b26edea6bb9, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4422855556455150, guid: 700f95d06b429e84eabe4b26edea6bb9, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4422855556455150, guid: 700f95d06b429e84eabe4b26edea6bb9, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4422855556455150, guid: 700f95d06b429e84eabe4b26edea6bb9, type: 2}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114858495766937366, guid: 700f95d06b429e84eabe4b26edea6bb9,
-        type: 2}
-      propertyPath: id
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114858495766937366, guid: 700f95d06b429e84eabe4b26edea6bb9,
-        type: 2}
-      propertyPath: initialMarking
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 700f95d06b429e84eabe4b26edea6bb9, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1 &1375609840
 GameObject:
   m_ObjectHideFlags: 0
@@ -913,11 +851,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4896508587000028, guid: e3165ec81a243f842a82595c678390ad, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 3.19
       objectReference: {fileID: 0}
     - target: {fileID: 4896508587000028, guid: e3165ec81a243f842a82595c678390ad, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 4896508587000028, guid: e3165ec81a243f842a82595c678390ad, type: 2}
       propertyPath: m_LocalPosition.z
@@ -952,7 +890,7 @@ Prefab:
         type: 2}
       propertyPath: postconditions.Array.data[0]
       value: 
-      objectReference: {fileID: 631112109}
+      objectReference: {fileID: 0}
     - target: {fileID: 114739446489586166, guid: e3165ec81a243f842a82595c678390ad,
         type: 2}
       propertyPath: transitionExplosion
