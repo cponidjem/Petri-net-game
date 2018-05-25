@@ -8,16 +8,50 @@ public class GenericEdges : MonoBehaviour {
 	private GameObject arrow;
 	private GameObject obj = null;
 	private Vector3 init = new Vector3(0,0);
-    private bool placeType;
+    private bool useMouse = true;
+    public GameObject debugToken;
+    private GameObject debugTool = null;
+    private GameObject debugToolStart = null;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
 		arrow = GameObject.Find ("Arrow");
-	}
+    }
 
 	// Update is called once per frame
 	void Update () {
-		if (Input.touchCount > 0)
+        // Draw Arcs with mouse for debugging 
+        if (useMouse)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                debugTool = Instantiate(debugToken, transform);
+                debugToolStart = Instantiate(debugToken, transform);
+                RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+                if (hit.collider != null)
+                {
+                    if (hit.collider.gameObject.CompareTag("Place") || hit.collider.gameObject.CompareTag("Transition"))
+                    {
+                        obj = hit.collider.gameObject;
+                    }
+                }
+            }
+            else if (Input.GetMouseButton(0))
+            {
+                if (obj != null)
+                {
+                    newConfigureArrow(obj, Camera.main.ScreenToWorldPoint(Input.mousePosition));
+                }
+            }
+            else if (Input.GetMouseButtonUp(0))
+            {
+                Destroy(debugTool);
+                Destroy(debugToolStart);
+                configureArrow(init, init);
+                obj = null;
+            }
+        }
+		else if (Input.touchCount > 0)
 		{
 			Touch touch = Input.GetTouch(0);
 			Vector3 touchPos = Camera.main.ScreenToWorldPoint(touch.position);
@@ -29,13 +63,8 @@ public class GenericEdges : MonoBehaviour {
 			case TouchPhase.Began:
 				RaycastHit2D hit = Physics2D.Raycast (Camera.main.ScreenToWorldPoint (Input.mousePosition), Vector2.zero);
 				if (hit.collider!=null) {
-					if (hit.collider.gameObject.CompareTag("Place")) {
+					if (hit.collider.gameObject.CompareTag("Place") || hit.collider.gameObject.CompareTag("Transition")) {
 						obj = hit.collider.gameObject;
-                        placeType = true;
-                    }
-                    else if(hit.collider.gameObject.CompareTag("Transition")) {
-                        obj = hit.collider.gameObject;
-                        placeType = false;
                     }
 				}
 				break;
@@ -45,7 +74,7 @@ public class GenericEdges : MonoBehaviour {
 				//display the moving line
 				if(obj != null) {
 					//configureArrow (getAppropriatePosition (obj, touchPos.x), touchPos);
-                    newConfigureArrow(obj.transform.position, touchPos);
+                    newConfigureArrow(obj, touchPos);
 				}
 				break;
 
@@ -82,41 +111,36 @@ public class GenericEdges : MonoBehaviour {
 		arrow.transform.rotation = Quaternion.AngleAxis (rotationZ, Vector3.forward);
 	}
 
-    private void newConfigureArrow(Vector3 sourcePosition, Vector3 destinationPosition)
+    private void newConfigureArrow(GameObject sourceObject, Vector3 destinationPosition)
     {
-        // Place the arc between place and touchDestination
-        float angle = Vector3.SignedAngle(sourcePosition - destinationPosition, Vector3.right, Vector3.forward);
+        Vector3 sourcePosition = sourceObject.transform.position;
+        destinationPosition = destinationPosition + 2*Vector3.forward; // because canvas is +2 in front
+
+        float angle = Vector3.SignedAngle(sourcePosition - destinationPosition, new Vector3(1, 0, 0), new Vector3(0,0,1));
         float angleRad = Mathf.Deg2Rad * angle;
-        float r = 1F;
-        float transitionWidth = 0.1F;
+        float placeElementRay = 1F;
+        float transitionElementWidth = 0.1F;
 
         // Move sourceDestination according to the type of the source
-        if (placeType)
+        if (sourceObject.CompareTag("Place"))
         {
-            sourcePosition = sourcePosition + new Vector3(-Mathf.Cos(angleRad) * r, Mathf.Sin(angleRad) * r);
+            sourcePosition += new Vector3(-Mathf.Cos(angleRad), Mathf.Sin(angleRad))* placeElementRay;
         }
         else
         {
-            sourcePosition = sourcePosition +
-            new Vector3(transitionWidth * Mathf.Sign(sourcePosition.x - destinationPosition.x), 0);
+            sourcePosition += new Vector3(transitionElementWidth * Mathf.Sign(destinationPosition.x - sourcePosition.x), Mathf.Sin(angleRad));
+            // Calculate small change in the angle caused by transitionElementWidth
+            angle = Vector3.SignedAngle(sourcePosition - destinationPosition, new Vector3(1, 0, 0), new Vector3(0, 0, 1));
         }
 
-        arrow.transform.position = new Vector3(
-            sourcePosition.x + (destinationPosition.x - sourcePosition.x) / 2,
-            sourcePosition.y + (destinationPosition.y - sourcePosition.y) / 2,
-            sourcePosition.z + (destinationPosition.z - sourcePosition.z) / 2);
+        // Cool objects for start && end
+        debugToolStart.transform.position = sourcePosition;
+        debugTool.transform.position = destinationPosition;
 
-        // Rotate the arc to right angle & according to type
-        float z_angle_deg =
-            (180 / Mathf.PI) *
-            Mathf.Atan(
-            ((sourcePosition.y - destinationPosition.y) / 2) /
-            ((sourcePosition.x - destinationPosition.x) / 2));
-
-        arrow.transform.rotation = Quaternion.AngleAxis(z_angle_deg, Vector3.forward);
-        // Scale the arc according to the distance
+        // position, rotation & scale
+        arrow.transform.position = sourcePosition + (destinationPosition - sourcePosition) / 2;
+        arrow.transform.rotation = Quaternion.AngleAxis(angle+180, Vector3.back);
         float distance = Vector3.Distance(sourcePosition, destinationPosition);
-        float scaleFactor = distance / 2;
-        arrow.transform.localScale = new Vector3(distance/2, arrow.transform.localScale.y);
+        arrow.transform.localScale = new Vector3(distance/2, arrow.transform.localScale.y,0);
     }
 }
