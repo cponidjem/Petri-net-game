@@ -55,7 +55,7 @@ public class GameController : GameElement {
 
             // If end is reached, memorize last level completed
             if (game.model.targetPetriNetReached ()) {
-				game.view.winningScreen ();
+				StartCoroutine(game.view.winningScreen ());
 				Debug.Log ("End reached.");
                 MemoryScript memory = GameObject.FindObjectOfType<MemoryScript>();
                 int lastLevelCompleted = int.Parse(SceneManager.GetActiveScene().name.Substring("Level_".Length));
@@ -84,7 +84,7 @@ public class GameController : GameElement {
 			if (lastLevelCompleted == 2) {
 				// If end is reached, memorize last level completed
 				if (game.model.targetPetriNetReached2 ()) {
-					game.view.winningScreen ();
+					StartCoroutine(game.view.winningScreen ());
 					Debug.Log ("End reached.");
 					MemoryScript memory = GameObject.FindObjectOfType<MemoryScript>();
 
@@ -117,7 +117,7 @@ public class GameController : GameElement {
         game.view.updatePlaces(game.model.getPlaces());
 		// If end is reached, memorize last level completed
 		if (game.model.targetPetriNetReached ()) {
-			game.view.winningScreen ();
+			StartCoroutine(game.view.winningScreen ());
 			Debug.Log ("End reached.");
 			MemoryScript memory = GameObject.FindObjectOfType<MemoryScript>();
 			int lastLevelCompleted = int.Parse(SceneManager.GetActiveScene().name.Substring("Level_".Length));

@@ -88,7 +88,7 @@ public class GameView : GameElement {
     }
 
     // Display winning screen + fireworks animations
-	public void winningScreen(){
+	public IEnumerator winningScreen(){
         Vector3 position = GameObject.Find("Main Camera").transform.position;
         var cam = Camera.main;
         var p1 = cam.ViewportToWorldPoint(new Vector3(0, 0, cam.nearClipPlane));
@@ -99,6 +99,8 @@ public class GameView : GameElement {
             fireworks.transform.position = position;
             fireworks.transform.position += f * Vector3.right - p1.y * Vector3.down+ Vector3.forward * 5F;
         }
+
+		yield return new WaitForSecondsRealtime(3);
 
         winningPanel.SetActive(true);
     }
