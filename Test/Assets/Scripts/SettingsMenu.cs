@@ -38,10 +38,6 @@ public class SettingsMenu : MonoBehaviour {
     }
 
     public void QuitGame(){
-		MemoryScript memory = GameObject.FindObjectOfType<MemoryScript>();
-		if (memory != null) {
-			memory.Save ();
-		}
         Application.Quit();
     }
 

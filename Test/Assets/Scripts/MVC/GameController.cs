@@ -128,4 +128,20 @@ public class GameController : GameElement {
 		}
     }
 
+	void OnApplicationPause(){
+		MemoryScript memory = GameObject.FindObjectOfType<MemoryScript>();
+		if (memory != null) {
+			memory.Save ();
+		}
+	}
+
+	void OnApplicationQuit(){
+		MemoryScript memory = GameObject.FindObjectOfType<MemoryScript>();
+		if (memory != null) {
+			memory.Save ();
+		}
+	}
+
+
+
 }
