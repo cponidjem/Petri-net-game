@@ -24,7 +24,7 @@ public class AudioManager : MonoBehaviour {
 
         if (PauseMenu.GameIsPaused)
         {
-            myMusic.volume = 0.2f;
+            myMusic.volume = 0.1f;
         }
 
        /* foreach(Sound s in sounds){
