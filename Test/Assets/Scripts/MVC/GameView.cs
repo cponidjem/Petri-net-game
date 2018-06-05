@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameView : GameElement {
 	PlaceElement[] places;
@@ -100,10 +101,23 @@ public class GameView : GameElement {
             fireworks.transform.position += f * Vector3.right - p1.y * Vector3.down+ Vector3.forward * 5F;
         }
 
+		GameObject holder = GameObject.Find ("Canvas");
+		Button[] buttons = holder.GetComponentsInChildren<Button> ();
+		for (int i = 0; i < buttons.Length; i++) {
+			buttons[i].interactable = false;
+		}
 		yield return new WaitForSecondsRealtime(3);
 
         winningPanel.SetActive(true);
     }
+
+	public void enableButtons(){
+		GameObject holder = GameObject.Find ("Canvas");
+		Button[] buttons = holder.GetComponentsInChildren<Button> ();
+		for (int i = 0; i < buttons.Length; i++) {
+			buttons[i].interactable = true;
+		}
+	}
 
     // Change transition color according to its state
     public void updateTransitionStateColor(int transitionId, bool newState)

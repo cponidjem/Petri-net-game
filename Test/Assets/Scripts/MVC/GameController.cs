@@ -52,18 +52,22 @@ public class GameController : GameElement {
             // Update graphics
 			game.view.updatePlaces(places);
             game.view.updateTransitions(game.view.getTransitions());
+			int lastLevelCompleted = int.Parse(SceneManager.GetActiveScene().name.Substring("Level_".Length));
+			if (lastLevelCompleted != 2) {
+				if ((lastLevelCompleted == 5 && game.model.targetPetriNetReached2()) || lastLevelCompleted!=5) {
+					// If end is reached, memorize last level completed
+					if (game.model.targetPetriNetReached ()) {
+						StartCoroutine (game.view.winningScreen ());
+						Debug.Log ("End reached.");
+						MemoryScript memory = GameObject.FindObjectOfType<MemoryScript> ();
+						if (lastLevelCompleted > memory.getLastLevelCompleted ()) {
+							memory.setLastLevelCompleted (lastLevelCompleted);
+						}
 
-            // If end is reached, memorize last level completed
-            if (game.model.targetPetriNetReached ()) {
-				StartCoroutine(game.view.winningScreen ());
-				Debug.Log ("End reached.");
-                MemoryScript memory = GameObject.FindObjectOfType<MemoryScript>();
-                int lastLevelCompleted = int.Parse(SceneManager.GetActiveScene().name.Substring("Level_".Length));
-				if (lastLevelCompleted > memory.getLastLevelCompleted()) {
-					memory.setLastLevelCompleted(lastLevelCompleted);
+					}
 				}
-                
-            }
+			}
+           
 
             
         } else
@@ -108,6 +112,7 @@ public class GameController : GameElement {
 		List<Transition> newTransitions = game.model.resetTransitions ();
 		game.view.updatePlaces (newPlaces);
 		game.view.updateTransitions (newTransitions);
+		game.view.enableButtons ();
 		Debug.Log ("reset");
 	}
 
