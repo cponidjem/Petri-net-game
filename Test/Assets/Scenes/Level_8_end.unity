@@ -583,7 +583,7 @@ Prefab:
     - target: {fileID: 114858495766937366, guid: 700f95d06b429e84eabe4b26edea6bb9,
         type: 2}
       propertyPath: initialMarking
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1330587529014124, guid: 700f95d06b429e84eabe4b26edea6bb9, type: 2}
       propertyPath: m_Name
@@ -917,7 +917,7 @@ Prefab:
     - target: {fileID: 114858495766937366, guid: 700f95d06b429e84eabe4b26edea6bb9,
         type: 2}
       propertyPath: initialMarking
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 700f95d06b429e84eabe4b26edea6bb9, type: 2}

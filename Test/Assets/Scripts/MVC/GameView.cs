@@ -68,11 +68,11 @@ public class GameView : GameElement {
     public List<Transition> getTransitions()
     {
         List<Transition> transitions = new List<Transition>();
-        foreach (TransitionElement t in this.GetComponentsInChildren<TransitionElement>())
+		foreach (TransitionElement t in this.GetComponentsInChildren<TransitionElement>())
         {
             List<Arc> preconditions = new List<Arc>();
             List<Arc> postconditions = new List<Arc>();
-            foreach (ArcElement a in this.GetComponentsInChildren<ArcElement>())
+            foreach (ArcElement a in t.GetComponentsInChildren<ArcElement>())
             {
                 if (a.type == ArcElement.ConditionType.POSTCONDITION)
                 {

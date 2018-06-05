@@ -296,6 +296,9 @@ public class GameModel : GameElement
         }
     }
 
+	public List<Transition> getTransitions(){
+		return transitions;
+	}
 
 	/*void Start(){
 		places = new List<Place> ();

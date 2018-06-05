@@ -34,7 +34,7 @@ public class PauseMenu : MonoBehaviour
     public void Pause()
     {
         pauseMenuUI.SetActive(true);
-        Time.timeScale = 0f;
+        //Time.timeScale = 0f;
         GameIsPaused = true;
         OpenPanels = GameObject.FindGameObjectsWithTag("InstructionsPanel");
         if (OpenPanels != null)
@@ -51,7 +51,7 @@ public class PauseMenu : MonoBehaviour
 
     public void LoadMainScreen()
     {
-        Time.timeScale = 1f;
+        //Time.timeScale = 1f;
         SceneManager.LoadSceneAsync("LevelsMenu");
     }
 

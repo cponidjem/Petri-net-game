@@ -32,7 +32,20 @@ public class GameController : GameElement {
 
         // Initialise game model using the scene
 		game.model.initialisation(game.view.getPlaces(), game.view.getTransitions(),memory.getEndPlaces(),memory.getEndTransitions());
-        game.view.updateTransitions(game.view.getTransitions());
+		/*string str = "";
+		foreach (Transition t in tr) {
+			str += t.id;
+			str+=" preconditions: ";
+			foreach(Arc pre in t.preconditions){
+				str+= (pre.idPlace + ", " + pre.coeff+"; ");
+			}
+			str+= (" postconditions ");
+			foreach(Arc post in t.postconditions){
+				str+= (post.idPlace + ", " + post.coeff+"; ");
+			}
+		}
+		Debug.Log (str);*/
+		game.view.updateTransitions(game.model.getTransitions());
 
     }
 
@@ -51,7 +64,7 @@ public class GameController : GameElement {
 
             // Update graphics
 			game.view.updatePlaces(places);
-            game.view.updateTransitions(game.view.getTransitions());
+			game.view.updateTransitions(game.model.getTransitions());
 			int lastLevelCompleted = int.Parse(SceneManager.GetActiveScene().name.Substring("Level_".Length));
 			if (lastLevelCompleted != 2) {
 				if ((lastLevelCompleted == 5 && game.model.targetPetriNetReached2()) || lastLevelCompleted!=5) {

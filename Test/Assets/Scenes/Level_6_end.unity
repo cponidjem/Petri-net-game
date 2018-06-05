@@ -204,6 +204,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4eb886833c35fc648ab4bf21c3416735, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  winningScreenExplosion: {fileID: 0}
+  winningPanel: {fileID: 0}
 --- !u!114 &57636025
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -215,6 +217,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbc2ae5b8c479d9489fb15755d46e11c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debugToken: {fileID: 0}
 --- !u!1 &123475237
 GameObject:
   m_ObjectHideFlags: 0

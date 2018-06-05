@@ -9,9 +9,9 @@ public class GenericEdges : MonoBehaviour {
 	private GameObject obj = null;
 	private Vector3 init = new Vector3(0,0);
     private bool useMouse = true;
-    public GameObject debugToken;
+    //public GameObject debugToken;
     private GameObject debugTool = null;
-    private GameObject debugToolStart = null;
+    //private GameObject debugToolStart = null;
 
     // Use this for initialization
     void Start () {
@@ -25,8 +25,8 @@ public class GenericEdges : MonoBehaviour {
         {
             if (Input.GetMouseButtonDown(0))
             {
-                debugTool = Instantiate(debugToken, transform);
-                debugToolStart = Instantiate(debugToken, transform);
+                //debugTool = Instantiate(debugToken, transform);
+                //debugToolStart = Instantiate(debugToken, transform);
                 RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
                 if (hit.collider != null)
                 {
@@ -45,8 +45,8 @@ public class GenericEdges : MonoBehaviour {
             }
             else if (Input.GetMouseButtonUp(0))
             {
-                Destroy(debugTool);
-                Destroy(debugToolStart);
+                //Destroy(debugTool);
+                //Destroy(debugToolStart);
                 configureArrow(init, init);
                 obj = null;
             }
@@ -134,8 +134,8 @@ public class GenericEdges : MonoBehaviour {
         }
 
         // Cool objects for start && end
-        debugToolStart.transform.position = sourcePosition;
-        debugTool.transform.position = destinationPosition;
+        //debugToolStart.transform.position = sourcePosition;
+        //debugTool.transform.position = destinationPosition;
 
         // position, rotation & scale
         arrow.transform.position = sourcePosition + (destinationPosition - sourcePosition) / 2;

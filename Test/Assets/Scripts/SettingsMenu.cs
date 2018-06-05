@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class SettingsMenu : MonoBehaviour {
 
@@ -46,6 +47,7 @@ public class SettingsMenu : MonoBehaviour {
 		if (memory != null) {
 			memory.setLastLevelCompleted (0);
 			memory.Save ();
+			SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
 		}
 	}
 
