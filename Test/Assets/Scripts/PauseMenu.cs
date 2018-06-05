@@ -28,7 +28,7 @@ public class PauseMenu : MonoBehaviour
                 //go.collider.enabled = false;
             }
         }
-        music.myMusic.volume = 1f;
+       // music.myMusic.volume = 1f;
     }
 
     public void Pause()
@@ -46,13 +46,13 @@ public class PauseMenu : MonoBehaviour
         }
         music = GameObject.FindObjectOfType<AudioManager>();
         UpdateIconAndVolume();
-        music.myMusic.volume = 0.5f;
+       // music.myMusic.volume = 0.5f;
     }
 
     public void LoadMainScreen()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadSceneAsync("MainMenu");
+        SceneManager.LoadSceneAsync("LevelsMenu");
     }
 
     public void Quit()
