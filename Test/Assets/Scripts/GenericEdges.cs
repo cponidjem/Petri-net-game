@@ -5,28 +5,24 @@ using UnityEngine;
 
 public class GenericEdges : MonoBehaviour {
 
-	private GameObject arrow;
-	private GameObject obj = null;
+	public GameObject arrowPrefab;
+    public GameObject arrowHeadPrefab;
+    private GameObject obj = null;
 	private Vector3 init = new Vector3(0,0);
     private bool useMouse = true;
-    //public GameObject debugToken;
-    private GameObject debugTool = null;
-    //private GameObject debugToolStart = null;
+    private GameObject arrow = null;
+    private GameObject arrowHead = null;
 
-    // Use this for initialization
-    void Start () {
-		arrow = GameObject.Find ("Arrow");
-    }
 
-	// Update is called once per frame
-	void Update () {
+    // Update is called once per frame
+    void Update () {
         // Draw Arcs with mouse for debugging 
         if (useMouse)
         {
             if (Input.GetMouseButtonDown(0))
             {
-                //debugTool = Instantiate(debugToken, transform);
-                //debugToolStart = Instantiate(debugToken, transform);
+                arrow = Instantiate(arrowPrefab, transform);
+                arrowHead = Instantiate(arrowHeadPrefab, transform);
                 RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
                 if (hit.collider != null)
                 {
@@ -45,9 +41,19 @@ public class GenericEdges : MonoBehaviour {
             }
             else if (Input.GetMouseButtonUp(0))
             {
-                //Destroy(debugTool);
-                //Destroy(debugToolStart);
-                configureArrow(init, init);
+                Destroy(arrowHead);
+                Destroy(arrow);
+                obj = null;
+            }
+            // To make sure they are destroyed
+            else if (arrow != null)
+            {
+                Destroy(arrow);
+                obj = null;
+            }
+            else if (arrowHead != null)
+            {
+                Destroy(arrowHead);
                 obj = null;
             }
         }
@@ -73,14 +79,14 @@ public class GenericEdges : MonoBehaviour {
 			case TouchPhase.Moved:
 				//display the moving line
 				if(obj != null) {
-					//configureArrow (getAppropriatePosition (obj, touchPos.x), touchPos);
                     newConfigureArrow(obj, touchPos);
 				}
 				break;
 
 			//touch ended
 			case TouchPhase.Ended:
-				configureArrow (init, init);
+				Destroy(arrowHead);
+                Destroy(arrow);
 				obj = null;
 				break;
 			}
@@ -97,19 +103,6 @@ public class GenericEdges : MonoBehaviour {
 		}
 	}
 
-	private void configureArrow(Vector3 start, Vector3 end){
-		Vector3 position = start;
-		position.x = (start.x+end.x)/2;
-		position.y = (start.y+end.y)/2;
-		float scaleX = Mathf.Sqrt (Mathf.Pow(end.y-start.y,2)+Mathf.Pow(end.x-start.x,2));
-		float rotationZ = Mathf.Rad2Deg * Mathf.Acos ((end.x-start.x)/scaleX);
-		if (start.y >end.y) {
-			rotationZ = - rotationZ;
-		}
-		arrow.transform.position = position;
-		arrow.transform.localScale = new Vector3(scaleX/2, arrow.transform.localScale.y, 0);
-		arrow.transform.rotation = Quaternion.AngleAxis (rotationZ, Vector3.forward);
-	}
 
     private void newConfigureArrow(GameObject sourceObject, Vector3 destinationPosition)
     {
@@ -131,11 +124,14 @@ public class GenericEdges : MonoBehaviour {
             sourcePosition += new Vector3(transitionElementWidth * Mathf.Sign(destinationPosition.x - sourcePosition.x), Mathf.Sin(angleRad));
             // Calculate small change in the angle caused by transitionElementWidth
             angle = Vector3.SignedAngle(sourcePosition - destinationPosition, new Vector3(1, 0, 0), new Vector3(0, 0, 1));
+            angleRad = Mathf.Deg2Rad * angle;
         }
 
         // Cool objects for start && end
-        //debugToolStart.transform.position = sourcePosition;
-        //debugTool.transform.position = destinationPosition;
+        float arrowHeadSize = 0.2f;
+        Vector3 arrowHeadPosition = destinationPosition - new Vector3(-Mathf.Cos(angleRad), Mathf.Sin(angleRad)) * arrowHeadSize;
+        arrowHead.transform.position = arrowHeadPosition;
+        arrowHead.transform.rotation = Quaternion.AngleAxis(angle + 180, Vector3.back);
 
         // position, rotation & scale
         arrow.transform.position = sourcePosition + (destinationPosition - sourcePosition) / 2;
