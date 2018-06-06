@@ -7,9 +7,9 @@ public class GenericEdges : MonoBehaviour {
 
 	public GameObject arrowPrefab;
     public GameObject arrowHeadPrefab;
+    public bool useMouse = true;
     private GameObject obj = null;
 	private Vector3 init = new Vector3(0,0);
-    private bool useMouse = true;
     private GameObject arrow = null;
     private GameObject arrowHead = null;
 
@@ -36,24 +36,23 @@ public class GenericEdges : MonoBehaviour {
             {
                 if (obj != null)
                 {
-                    newConfigureArrow(obj, Camera.main.ScreenToWorldPoint(Input.mousePosition));
+                    RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+                    if (hit.collider != null && hit.collider.gameObject.Equals(obj))
+                    {
+                        //Place arrow to zero
+                        arrowHead.transform.position = new Vector3(0, 0, 0);
+                        arrow.transform.position = new Vector3(0, 0, 0);
+                    }
+                    else
+                    {
+                        newConfigureArrow(obj, Camera.main.ScreenToWorldPoint(Input.mousePosition));
+                    }
                 }
             }
             else if (Input.GetMouseButtonUp(0))
             {
                 Destroy(arrowHead);
                 Destroy(arrow);
-                obj = null;
-            }
-            // To make sure they are destroyed
-            else if (arrow != null)
-            {
-                Destroy(arrow);
-                obj = null;
-            }
-            else if (arrowHead != null)
-            {
-                Destroy(arrowHead);
                 obj = null;
             }
         }
@@ -79,7 +78,17 @@ public class GenericEdges : MonoBehaviour {
 			case TouchPhase.Moved:
 				//display the moving line
 				if(obj != null) {
-                    newConfigureArrow(obj, touchPos);
+                    RaycastHit2D hit2 = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+                    if (hit2.collider != null && hit2.collider.gameObject.Equals(obj))
+                    {
+                        //Place arrow to zero
+                        arrowHead.transform.position = new Vector3(0, 0, 0);
+                        arrow.transform.position = new Vector3(0, 0, 0);
+                    }
+                    else
+                    {
+                        newConfigureArrow(obj, touchPos);
+                    }
 				}
 				break;
 
@@ -91,7 +100,18 @@ public class GenericEdges : MonoBehaviour {
 				break;
 			}
 		}
-	}
+        // To make sure they are destroyed
+        else if (arrow != null)
+        {
+            Destroy(arrow);
+            obj = null;
+        }
+        else if (arrowHead != null)
+        {
+            Destroy(arrowHead);
+            obj = null;
+        }
+    }
 
 	private Vector3 getAppropriatePosition(GameObject start, float endPosX) {
 		Vector3 startPos = start.transform.position;
