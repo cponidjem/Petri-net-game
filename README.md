@@ -1,1 +1,1 @@
-Petri Nets
+![banner image](Banner.png?raw=true "Title")
