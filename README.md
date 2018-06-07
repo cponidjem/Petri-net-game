@@ -7,4 +7,5 @@ If you find the project interesting, feel free to contribute! The game was devel
 
 
 Love,
+
 *PETRI NET TEAM*
