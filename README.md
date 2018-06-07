@@ -4,5 +4,5 @@
 ### If you find the project interesting, feel free to contribute! The game was developed using Unity.
 
 
-Love,
+### Love,
 ## PETRI NET TEAM
