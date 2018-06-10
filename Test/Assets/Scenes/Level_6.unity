@@ -221,6 +221,7 @@ MonoBehaviour:
     type: 2}
   arrowHeadPrefab: {fileID: 1215654875122686, guid: 49abfd93949befe4fa686e40e3a8de2d,
     type: 2}
+  useMouse: 1
 --- !u!1 &123475237
 GameObject:
   m_ObjectHideFlags: 0
@@ -1963,7 +1964,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 9d1005d3b95436c44b890246d8e7f145, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 89132853ff22b1b4da19e7678acfda8c, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
